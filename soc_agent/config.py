@@ -1,0 +1,169 @@
+"""Configuration system: config.yaml + SOC_AGENT_* env overrides.
+
+Spec: project-setup-01-spec.md §7 (Architecture §9).
+Precedence (highest wins): process env > config.yaml > built-in defaults.
+"""
+
+from __future__ import annotations
+
+import os
+from functools import lru_cache
+from pathlib import Path
+
+import yaml
+from pydantic import BaseModel, Field, ValidationError, model_validator
+from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict
+
+DEFAULT_CONFIG_FILE = Path("config.yaml")
+
+_explicit_path: Path | None = None
+
+
+class ConfigError(RuntimeError):
+    """Invalid or unreadable configuration."""
+
+
+class ModelsConfig(BaseModel):
+    default: str = "qwen3.7-max"
+    overrides: dict[str, str] = Field(default_factory=dict)
+
+
+class LLMConfig(BaseModel):
+    base_url: str = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+    max_tokens: int = Field(default=4096, gt=0)
+    temperature: float = 0.0
+    enable_thinking: bool = False
+    timeout_s: int = 120
+    max_retries: int = 2
+
+
+class ThreatIntelConfig(BaseModel):
+    providers: list[str] = Field(default_factory=lambda: ["mock"])
+    lookup_timeout_s: int = 5
+    cache_ttl_s: int = 3600
+
+
+class HistoryConfig(BaseModel):
+    store: str = "sqlite"
+    path: str = "data/history.db"
+    window_days: int = 30
+
+
+class AttackConfig(BaseModel):
+    catalog: str = "data/attack_catalog.json"
+    candidate_top_k: int = 12
+    max_techniques: int = 5
+
+
+class ScoringWeights(BaseModel):
+    ti: float = 0.45
+    severity: float = 0.30
+    history: float = 0.25
+
+
+class ScoringBands(BaseModel):
+    escalate: int = 70
+    investigate: int = 40
+
+
+class ScoringConfig(BaseModel):
+    weights: ScoringWeights = Field(default_factory=ScoringWeights)
+    bands: ScoringBands = Field(default_factory=ScoringBands)
+
+    @model_validator(mode="after")
+    def _validate(self) -> ScoringConfig:
+        total = self.weights.ti + self.weights.severity + self.weights.history
+        if abs(total - 1.0) > 0.001:
+            raise ValueError(f"scoring.weights must sum to 1.0 (got {total:.3f})")
+        if self.bands.escalate <= self.bands.investigate:
+            raise ValueError(
+                "scoring.bands.escalate must be greater than scoring.bands.investigate"
+            )
+        return self
+
+
+class BriefingConfig(BaseModel):
+    max_words: int = 200
+
+
+class AppConfig(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_prefix="SOC_AGENT_",
+        env_nested_delimiter="__",
+        extra="ignore",
+    )
+
+    models: ModelsConfig = Field(default_factory=ModelsConfig)
+    llm: LLMConfig = Field(default_factory=LLMConfig)
+    threat_intel: ThreatIntelConfig = Field(default_factory=ThreatIntelConfig)
+    history: HistoryConfig = Field(default_factory=HistoryConfig)
+    attack: AttackConfig = Field(default_factory=AttackConfig)
+    scoring: ScoringConfig = Field(default_factory=ScoringConfig)
+    briefing: BriefingConfig = Field(default_factory=BriefingConfig)
+
+    @classmethod
+    def settings_customise_sources(
+        cls,
+        settings_cls: type[BaseSettings],
+        init_settings: PydanticBaseSettingsSource,
+        env_settings: PydanticBaseSettingsSource,
+        dotenv_settings: PydanticBaseSettingsSource,
+        file_secret_settings: PydanticBaseSettingsSource,
+    ) -> tuple[PydanticBaseSettingsSource, ...]:
+        # First source wins: env vars override the YAML passed as init values.
+        return (env_settings, init_settings, dotenv_settings, file_secret_settings)
+
+
+def resolve_config_path(explicit: Path | None = None) -> Path | None:
+    """--config flag > SOC_AGENT_CONFIG env > ./config.yaml > None (built-in defaults)."""
+    if explicit is not None:
+        return explicit
+    env_path = os.environ.get("SOC_AGENT_CONFIG")
+    if env_path:
+        return Path(env_path)
+    if DEFAULT_CONFIG_FILE.exists():
+        return DEFAULT_CONFIG_FILE
+    return None
+
+
+def load_config(path: Path | None = None) -> AppConfig:
+    resolved = resolve_config_path(path)
+    data: dict = {}
+    if resolved is not None:
+        try:
+            raw = yaml.safe_load(resolved.read_text())
+        except FileNotFoundError as e:
+            raise ConfigError(f"config file not found: {resolved}") from e
+        except yaml.YAMLError as e:
+            raise ConfigError(f"invalid YAML in {resolved}: {e}") from e
+        if raw is None:
+            raw = {}
+        if not isinstance(raw, dict):
+            raise ConfigError(f"config root must be a mapping, got {type(raw).__name__}")
+        data = raw
+    try:
+        return AppConfig(**data)
+    except ValidationError as e:
+        raise ConfigError(str(e)) from e
+
+
+def set_config_path(path: Path | None) -> None:
+    """Set the explicit config path (from --config) and invalidate the cache."""
+    global _explicit_path
+    _explicit_path = path
+    reset_config()
+
+
+def current_config_path() -> Path | None:
+    """The config file the next get_config() call will use (None = built-in defaults)."""
+    return resolve_config_path(_explicit_path)
+
+
+@lru_cache(maxsize=1)
+def get_config() -> AppConfig:
+    return load_config(_explicit_path)
+
+
+def reset_config() -> None:
+    """Clear the cached config (used by tests and set_config_path)."""
+    get_config.cache_clear()

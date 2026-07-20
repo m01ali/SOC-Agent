@@ -1,0 +1,52 @@
+[project]
+name = "soc-agent"
+version = "0.1.0"
+description = "SOC alert-enrichment agent (POC): SIEM alert in, analyst-ready JSON out"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph>=0.3",
+    "langchain-openai>=0.3",
+    "langchain-core>=0.3",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.2",
+    "typer>=0.12",
+    "rich>=13",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+]
+api = [
+    "fastapi>=0.111",
+    "uvicorn>=0.30",
+]
+
+[project.scripts]
+soc-agent = "soc_agent.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["soc_agent*"]
+
+[tool.pytest.ini_options]
+addopts = "-q -m 'not llm'"
+markers = [
+    "llm: calls the DashScope API — run explicitly with `pytest -m llm`",
+]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

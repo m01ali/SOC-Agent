@@ -1,0 +1,19 @@
+# secrets & local env
+.env
+
+# python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# generated / local artifacts
+data/history.db
+results/
+eval_results.json
+
+# os
+.DS_Store
