@@ -1,0 +1,50 @@
+[
+  {
+    "confidence": 1.0,
+    "is_internal": true,
+    "provenance": {
+      "field": "src_ip",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "source",
+    "type": "ip",
+    "value": "10.20.22.41"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "src_host",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "source",
+    "type": "host",
+    "value": "WS-MKT-0077"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "user",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "actor",
+    "type": "user",
+    "value": "s.novak"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "query",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "unknown",
+    "type": "domain",
+    "value": "cdn-metrics-sync.example-analytics.net"
+  }
+]

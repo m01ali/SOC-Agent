@@ -1,0 +1,50 @@
+[
+  {
+    "confidence": 1.0,
+    "is_internal": false,
+    "provenance": {
+      "field": "src_ip",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "source",
+    "type": "ip",
+    "value": "198.51.100.23"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": true,
+    "provenance": {
+      "field": "dest_ip",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "destination",
+    "type": "ip",
+    "value": "10.20.7.5"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "dest_host",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "destination",
+    "type": "host",
+    "value": "BASTION-01"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "user",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "target",
+    "type": "user",
+    "value": "admin"
+  }
+]

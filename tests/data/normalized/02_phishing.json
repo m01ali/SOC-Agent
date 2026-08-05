@@ -1,0 +1,27 @@
+{
+  "alert_id": "soc-agent-4ba8510d222b",
+  "category": "phishing",
+  "dedupe_key": "4ba8510d222b1374dab76bc47ba59750384a0e3d997ab42b4edd2176a685ca38",
+  "description": "User j.okafor (Finance) reported a suspicious email with subject \"Invoice overdue\". The email body contains the link hxxps://payroll-update[.]example-billing[.]net/login and an attachment named invoice_2207.xlsm with SHA256 hash 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08. User clicked the link on a personal device; it is unsure whether the corporate laptop was also used. Reported 2026-07-20 08:41 local time.",
+  "ingested_at": "2026-07-20T12:00:00Z",
+  "normalization": {
+    "confidence": 0.9,
+    "method": "llm",
+    "warnings": [
+      "llm_normalization"
+    ]
+  },
+  "observed_fields": {
+    "domain": "payroll-update[.]example-billing[.]net",
+    "file_path": "invoice_2207.xlsm",
+    "url": "hxxps://payroll-update[.]example-billing[.]net/login",
+    "user": "j.okafor"
+  },
+  "occurred_at": "2026-07-20T08:41:00Z",
+  "raw": "FW: suspicious email reported by j.okafor (Finance). Subject \"Invoice overdue\".\nLink in body: hxxps://payroll-update[.]example-billing[.]net/login\nAttachment invoice_2207.xlsm, sha256 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08.\nUser clicked the link on a personal device, unsure about corporate laptop.\nReported 2026-07-20 08:41 local time.\n",
+  "severity": 85,
+  "severity_original": null,
+  "source_system": "freetext",
+  "title": "Suspicious Email Reported: Invoice Overdue with Malicious Link and Attachment",
+  "vendor_rule": null
+}

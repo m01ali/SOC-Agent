@@ -1,0 +1,62 @@
+[
+  {
+    "confidence": 1.0,
+    "is_internal": true,
+    "provenance": {
+      "field": "src_ip",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "source",
+    "type": "ip",
+    "value": "10.20.14.88"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": true,
+    "provenance": {
+      "field": "dest_ip",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "destination",
+    "type": "ip",
+    "value": "10.20.30.12"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "src_host",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "source",
+    "type": "host",
+    "value": "WS-FIN-0142"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "dest_host",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "destination",
+    "type": "host",
+    "value": "FS-CORP-03"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "user",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "actor",
+    "type": "user",
+    "value": "l.hassan"
+  }
+]

@@ -6,12 +6,14 @@ Precedence (highest wins): process env > config.yaml > built-in defaults.
 
 from __future__ import annotations
 
+import ipaddress
 import os
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 import yaml
-from pydantic import BaseModel, Field, ValidationError, model_validator
+from pydantic import BaseModel, Field, ValidationError, field_validator, model_validator
 from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict
 
 DEFAULT_CONFIG_FILE = Path("config.yaml")
@@ -86,6 +88,42 @@ class BriefingConfig(BaseModel):
     max_words: int = 200
 
 
+_DEFAULT_INTERNAL_RANGES: list[str] = [
+    "10.0.0.0/8",
+    "172.16.0.0/12",
+    "192.168.0.0/16",
+    "127.0.0.0/8",
+    "169.254.0.0/16",
+    "100.64.0.0/10",
+    "::1/128",
+    "fc00::/7",
+    "fe80::/10",
+]
+
+LLMAssistMode = Literal["freetext", "always", "never"]
+
+
+class ExtractionConfig(BaseModel):
+    llm_assist: LLMAssistMode = "freetext"
+    max_entities: int = Field(default=200, gt=0)
+    max_llm_additions: int = Field(default=20, gt=0)
+    llm_confidence: float = Field(default=0.6, ge=0, le=1)
+    aggressive_refang: bool = False
+    derive_email_domain: bool = False
+    sweep_observed_fields: bool = False
+    internal_ranges: list[str] = Field(default_factory=lambda: list(_DEFAULT_INTERNAL_RANGES))
+
+    @field_validator("internal_ranges")
+    @classmethod
+    def _validate_ranges(cls, value: list[str]) -> list[str]:
+        for cidr in value:
+            try:
+                ipaddress.ip_network(cidr, strict=False)
+            except ValueError as e:
+                raise ValueError(f"invalid CIDR in extraction.internal_ranges: {cidr!r}") from e
+        return value
+
+
 class AppConfig(BaseSettings):
     model_config = SettingsConfigDict(
         env_prefix="SOC_AGENT_",
@@ -100,6 +138,7 @@ class AppConfig(BaseSettings):
     attack: AttackConfig = Field(default_factory=AttackConfig)
     scoring: ScoringConfig = Field(default_factory=ScoringConfig)
     briefing: BriefingConfig = Field(default_factory=BriefingConfig)
+    extraction: ExtractionConfig = Field(default_factory=ExtractionConfig)
 
     @classmethod
     def settings_customise_sources(

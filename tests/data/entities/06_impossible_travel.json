@@ -1,0 +1,38 @@
+[
+  {
+    "confidence": 1.0,
+    "is_internal": false,
+    "provenance": {
+      "field": "src_ip",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "source",
+    "type": "ip",
+    "value": "198.51.100.77"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "host",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "unknown",
+    "type": "host",
+    "value": "sso-gateway"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "user",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "target",
+    "type": "user",
+    "value": "m.silva"
+  }
+]

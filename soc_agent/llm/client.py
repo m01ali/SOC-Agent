@@ -13,7 +13,7 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
 
 from soc_agent.config import get_config
-from soc_agent.llm.cache import maybe_cache
+from soc_agent.llm.cache import cache_mode, maybe_cache
 
 
 class MissingAPIKeyError(RuntimeError):
@@ -30,9 +30,16 @@ def get_llm(node: str, *, structured: type[BaseModel] | None = None):
     """
     api_key = os.environ.get("DASHSCOPE_API_KEY")
     if not api_key:
-        raise MissingAPIKeyError(
-            "DASHSCOPE_API_KEY is not set. Copy .env.example to .env and add your key."
-        )
+        if cache_mode() == "replay":
+            # Never actually used: a cache hit returns before any HTTP call, and a
+            # miss raises CacheMissError. This lets a keyless machine replay the
+            # committed cache (spec 03 §16 gate 8) instead of failing before the
+            # cache is ever consulted.
+            api_key = "replay-placeholder"
+        else:
+            raise MissingAPIKeyError(
+                "DASHSCOPE_API_KEY is not set. Copy .env.example to .env and add your key."
+            )
     cfg = get_config()
     model = cfg.models.overrides.get(node, cfg.models.default)
     llm = ChatOpenAI(

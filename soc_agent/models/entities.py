@@ -92,3 +92,10 @@ class EntityCandidate(ContractModel):
     value: str = Field(min_length=1)
     role: EntityRole = "unknown"
     context_span: str | None = None
+
+
+class ExtractionSelection(ContractModel):
+    """LLM structured output for the extraction assist (spec 04): the list wrapper
+    with_structured_output requires. Additive — does not change SCHEMA_VERSION."""
+
+    entities: list[EntityCandidate] = Field(default_factory=list, max_length=40)

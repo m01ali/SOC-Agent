@@ -26,6 +26,10 @@ _DETERMINISTIC_FIXTURES = [
     "09_exfil_volume.cef",
 ]
 
+# Free-text fixtures, added per extraction-04-spec.md §13.3: replayed from spec 03's
+# committed LLM cache so all 10 fixtures normalize inside the API-free default run.
+_FREETEXT_FIXTURES = ["02_phishing.txt", "10_injection.txt"]
+
 # §8 canonical vocabulary keys — the interface spec 04's field-map pass keys off.
 _VOCABULARY_KEYS = {
     "src_ip",
@@ -92,3 +96,25 @@ def test_golden_matches(fname: str, pytestconfig: pytest.Config):
         assert key in _VOCABULARY_KEYS or key in _PASSTHROUGH_KEYS, (
             f"{fname}: undocumented observed_fields key {key!r}"
         )
+
+
+@pytest.mark.parametrize("fname", _FREETEXT_FIXTURES)
+def test_freetext_golden_matches(fname: str, pytestconfig: pytest.Config, monkeypatch):
+    """§13.3: forced replay, independent of whether a key is present in this session,
+    so the golden stays reproducible for anyone running the default (API-free) suite."""
+    monkeypatch.setenv("SOC_AGENT_LLM_CACHE", "replay")
+    raw = (FIXTURES_DIR / fname).read_text()
+    alert = normalize(raw, now=FROZEN_NOW)
+    stem = fname.rsplit(".", 1)[0]
+    golden_path = GOLDENS_DIR / f"{stem}.json"
+
+    if pytestconfig.getoption("--update-goldens"):
+        golden_path.write_text(_dump(alert))
+        return
+
+    expected = golden_path.read_text()
+    assert _dump(alert) == expected
+
+    labels = yaml.safe_load((FIXTURES_DIR / f"{stem}.expected.yaml").read_text())
+    assert alert.category == labels["category"]
+    assert alert.source_system == labels["format"]

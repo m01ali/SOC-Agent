@@ -825,3 +825,5 @@ Phase 02 is **done** when all eight pass and the commit exists. Next: `ingestion
 ---
 
 *Changelog: (add dated entries here when contracts change after the freeze)*
+
+- **2026-08-05** — Added `ExtractionSelection` (`entities.py`) per extraction-04-spec.md §13.1: the `list[EntityCandidate]` wrapper `with_structured_output` requires for the extraction-assist LLM node. Additive only — no existing shape changed, `SCHEMA_VERSION` unchanged.

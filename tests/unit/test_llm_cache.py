@@ -55,8 +55,17 @@ class _FakeChatRunnable:
         return self.result
 
 
-def _runnable(fake, *, mode, tmp_path, node="test_node", model="qwen3.7-max",
-              structured=None, force=False, counter=None):
+def _runnable(
+    fake,
+    *,
+    mode,
+    tmp_path,
+    node="test_node",
+    model="qwen3.7-max",
+    structured=None,
+    force=False,
+    counter=None,
+):
     return CachedRunnable(
         fake,
         mode=mode,

@@ -25,3 +25,21 @@ scoring:
   bands:   { escalate: 70, investigate: 40 }
 briefing:
   max_words: 200
+extraction:
+  llm_assist: freetext        # freetext | always | never
+  max_entities: 200
+  max_llm_additions: 20
+  llm_confidence: 0.6
+  aggressive_refang: false    # adds " dot ", " at ", "\." to the refang table
+  derive_email_domain: false  # emit the domain part of an email as its own entity
+  sweep_observed_fields: false
+  internal_ranges:            # documentation ranges are deliberately absent
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 100.64.0.0/10
+    - ::1/128
+    - fc00::/7
+    - fe80::/10

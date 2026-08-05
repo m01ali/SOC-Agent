@@ -1,0 +1,62 @@
+[
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "user",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "target",
+    "type": "user",
+    "value": "j.okafor"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "file_path",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "unknown",
+    "type": "file_path",
+    "value": "invoice_2207.xlsm"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "url",
+      "method": "field_map",
+      "original_text": "hxxps://payroll-update[.]example-billing[.]net/login"
+    },
+    "role": "destination",
+    "type": "url",
+    "value": "https://payroll-update.example-billing.net/login"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "domain",
+      "method": "field_map",
+      "original_text": "payroll-update[.]example-billing[.]net"
+    },
+    "role": "destination",
+    "type": "domain",
+    "value": "payroll-update.example-billing.net"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "description",
+      "method": "regex",
+      "original_text": null
+    },
+    "role": "unknown",
+    "type": "hash_sha256",
+    "value": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+  }
+]

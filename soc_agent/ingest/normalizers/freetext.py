@@ -31,8 +31,11 @@ def _invoke(ctx: IngestContext) -> NormalizedAlertDraft:
         ctx.warn(WARN_LLM_REPAIR_RETRY)
         repair_messages = [
             *messages,
-            ("user", f"Your previous output failed validation with this error: {e}\n"
-                     "Return corrected structured output."),
+            (
+                "user",
+                f"Your previous output failed validation with this error: {e}\n"
+                "Return corrected structured output.",
+            ),
         ]
         return llm.invoke(repair_messages)
 
@@ -64,7 +67,5 @@ def normalize(ctx: IngestContext) -> NormalizedAlert:
         ingested_at=ctx.now,
         observed_fields={k: str(v) for k, v in draft.observed_fields.items()},
         raw=ctx.raw,
-        normalization=NormalizationInfo(
-            method="llm", confidence=confidence, warnings=ctx.warnings
-        ),
+        normalization=NormalizationInfo(method="llm", confidence=confidence, warnings=ctx.warnings),
     )

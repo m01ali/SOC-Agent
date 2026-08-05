@@ -1,0 +1,50 @@
+[
+  {
+    "confidence": 1.0,
+    "is_internal": false,
+    "provenance": {
+      "field": "dest_ip",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "destination",
+    "type": "ip",
+    "value": "203.0.113.150"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "host",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "unknown",
+    "type": "host",
+    "value": "WS-HR-0009"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "user",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "actor",
+    "type": "user",
+    "value": "t.baros"
+  },
+  {
+    "confidence": 1.0,
+    "is_internal": null,
+    "provenance": {
+      "field": "process",
+      "method": "field_map",
+      "original_text": null
+    },
+    "role": "unknown",
+    "type": "process",
+    "value": "powershell"
+  }
+]

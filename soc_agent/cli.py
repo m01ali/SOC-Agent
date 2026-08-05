@@ -133,6 +133,47 @@ def normalize(
 
 
 @app.command()
+def extract(
+    input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to extract.")],
+    fmt: Annotated[
+        str | None, typer.Option("--format", help="generic|splunk|elastic|cef|freetext")
+    ] = None,
+    no_llm: Annotated[
+        bool, typer.Option("--no-llm", help="Force extraction.llm_assist=never.")
+    ] = False,
+    pretty: Annotated[bool, typer.Option("--pretty")] = False,
+) -> None:
+    """Normalize an alert and print its extracted entities as JSON (spec 04 debugging surface)."""
+    import json
+
+    from soc_agent.extract import extract_entities, ioc_entities
+    from soc_agent.ingest import IngestError, load_input
+    from soc_agent.ingest import normalize as normalize_alert
+    from soc_agent.llm.client import MissingAPIKeyError
+
+    try:
+        raw = load_input(input_path)
+        alert = normalize_alert(raw, hint=fmt)  # type: ignore[arg-type]
+        result = extract_entities(alert, llm_assist_mode="never" if no_llm else None)
+    except MissingAPIKeyError as e:
+        _fail(str(e))
+    except IngestError as e:
+        typer.secho(f"✗ {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(2) from e
+
+    payload = {
+        "alert_id": alert.alert_id,
+        "entities": [e.model_dump(mode="json") for e in result.entities],
+        "iocs": [e.value for e in ioc_entities(result.entities)],
+        "errors": [e.model_dump(mode="json") for e in result.errors],
+        "dropped": result.dropped,
+        "llm_used": result.llm_used,
+    }
+    indent = 2 if pretty else None
+    typer.echo(json.dumps(payload, indent=indent, sort_keys=pretty))
+
+
+@app.command()
 def enrich(
     input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to enrich.")],
 ) -> None:

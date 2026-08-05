@@ -1,0 +1,37 @@
+{
+  "data": {
+    "entities": [
+      {
+        "context_span": "User j.okafor (Finance) reported a suspicious email",
+        "role": "actor",
+        "type": "user",
+        "value": "j.okafor"
+      },
+      {
+        "context_span": "link hxxps://payroll-update[.]example-billing[.]net/login",
+        "role": "unknown",
+        "type": "url",
+        "value": "hxxps://payroll-update[.]example-billing[.]net/login"
+      },
+      {
+        "context_span": "attachment named invoice_2207.xlsm",
+        "role": "unknown",
+        "type": "file_path",
+        "value": "invoice_2207.xlsm"
+      },
+      {
+        "context_span": "SHA256 hash 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+        "role": "unknown",
+        "type": "hash_sha256",
+        "value": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+      }
+    ]
+  },
+  "key": "15196a93f3f73fe4b866e611440dd6a45ec201dfbae4dd7721696146e1b25d41",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "extract",
+  "recorded_at": "2026-08-05T12:16:24.347412+00:00",
+  "schema_name": "ExtractionSelection",
+  "usage_metadata": {}
+}

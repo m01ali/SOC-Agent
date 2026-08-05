@@ -1,0 +1,37 @@
+{
+  "data": {
+    "entities": [
+      {
+        "context_span": "Unusual PowerShell activity on WS-HR-0009",
+        "role": "target",
+        "type": "host",
+        "value": "WS-HR-0009"
+      },
+      {
+        "context_span": "associated with user t.baros",
+        "role": "actor",
+        "type": "user",
+        "value": "t.baros"
+      },
+      {
+        "context_span": "powershell -nop -w hidden -enc SQBFAFgAKABOAGUAdwAtAE8AYgBqAGUAYwB0",
+        "role": "actor",
+        "type": "process",
+        "value": "powershell"
+      },
+      {
+        "context_span": "contacted 203.0.113.150 over port 8443",
+        "role": "destination",
+        "type": "ip",
+        "value": "203.0.113.150"
+      }
+    ]
+  },
+  "key": "0e00caa2502d7394c24589f9b35e7551f36a7e6dc4dec8a2a70074661e272509",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "extract",
+  "recorded_at": "2026-08-05T12:16:28.310453+00:00",
+  "schema_name": "ExtractionSelection",
+  "usage_metadata": {}
+}

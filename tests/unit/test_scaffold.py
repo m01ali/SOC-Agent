@@ -84,5 +84,15 @@ def test_check_without_key_exits_3(monkeypatch):
 
 def test_get_llm_without_key_raises(monkeypatch):
     monkeypatch.delenv("DASHSCOPE_API_KEY", raising=False)
+    monkeypatch.setenv("SOC_AGENT_LLM_CACHE", "off")
     with pytest.raises(MissingAPIKeyError):
         get_llm("check")
+
+
+def test_get_llm_without_key_in_replay_mode_does_not_raise(monkeypatch):
+    """extraction-04-spec.md §13.2: a keyless machine can replay the committed LLM
+    cache. The placeholder key is never used — a cache hit returns before any HTTP
+    call, and a miss raises CacheMissError, not MissingAPIKeyError."""
+    monkeypatch.delenv("DASHSCOPE_API_KEY", raising=False)
+    monkeypatch.setenv("SOC_AGENT_LLM_CACHE", "replay")
+    get_llm("check")

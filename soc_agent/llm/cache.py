@@ -227,6 +227,10 @@ def set_active_counter(counter: LLMCallCounter | None) -> None:
     _active_counter = counter
 
 
+def cache_mode() -> str:
+    return os.environ.get("SOC_AGENT_LLM_CACHE", "off")
+
+
 def maybe_cache(
     runnable: Any,
     *,
@@ -235,7 +239,7 @@ def maybe_cache(
     structured: type[BaseModel] | None,
     params: dict[str, Any],
 ) -> Any:
-    mode = os.environ.get("SOC_AGENT_LLM_CACHE", "off")
+    mode = cache_mode()
     if mode not in ("record", "replay"):
         return runnable
     directory = Path(os.environ.get("SOC_AGENT_LLM_CACHE_DIR", str(DEFAULT_CACHE_DIR)))

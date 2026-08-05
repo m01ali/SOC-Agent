@@ -30,6 +30,7 @@ from soc_agent.models.entities import (
     EntityRole,
     EntityType,
     ExtractionMethod,
+    ExtractionSelection,
 )
 from soc_agent.models.errors import ErrorType, Stage, StageError
 from soc_agent.models.fixtures import ExpectedEntity, ExpectedFixture
@@ -87,6 +88,7 @@ __all__ = [
     "ExpectedEntity",
     "ExpectedFixture",
     "ExtractionMethod",
+    "ExtractionSelection",
     "NormalizationInfo",
     "NormalizationMethod",
     "NormalizedAlert",
