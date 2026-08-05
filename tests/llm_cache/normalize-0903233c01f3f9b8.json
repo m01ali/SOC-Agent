@@ -1,0 +1,25 @@
+{
+  "data": {
+    "category": "phishing",
+    "confidence": 0.9,
+    "description": "User j.okafor (Finance) reported a suspicious email with subject \"Invoice overdue\". The email body contains the link hxxps://payroll-update[.]example-billing[.]net/login and an attachment named invoice_2207.xlsm with SHA256 hash 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08. User clicked the link on a personal device; it is unsure whether the corporate laptop was also used. Reported 2026-07-20 08:41 local time.",
+    "observed_fields": {
+      "domain": "payroll-update[.]example-billing[.]net",
+      "file_path": "invoice_2207.xlsm",
+      "url": "hxxps://payroll-update[.]example-billing[.]net/login",
+      "user": "j.okafor"
+    },
+    "occurred_at": "2026-07-20T08:41:00Z",
+    "severity": 85,
+    "severity_original": null,
+    "title": "Suspicious Email Reported: Invoice Overdue with Malicious Link and Attachment",
+    "vendor_rule": null
+  },
+  "key": "0903233c01f3f9b8618faeedca8457835e3ea5291ceb763a04b38466e7142574",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "normalize",
+  "recorded_at": "2026-08-04T19:44:56.754929+00:00",
+  "schema_name": "NormalizedAlertDraft",
+  "usage_metadata": {}
+}

@@ -1,0 +1,13 @@
+{
+  "search_name": "Network - Port Scan Detected - Rule",
+  "sid": "scheduler__admin__search__RMD5f9e8d7_at_1753020000_98765",
+  "urgency": "low",
+  "result": {
+    "_time": "2026-07-20T04:02:00Z",
+    "_raw": "portscan: 198.51.100.201 probed 24 tcp ports on 10.20.0.15 within 60s",
+    "src": "198.51.100.201",
+    "dest": "10.20.0.15",
+    "transport": "tcp",
+    "dest_port_count": "24"
+  }
+}

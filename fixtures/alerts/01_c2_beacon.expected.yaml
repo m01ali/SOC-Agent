@@ -1,0 +1,10 @@
+format: generic
+category: command_and_control
+action: escalate
+entities:
+  - { type: ip, value: 203.0.113.66, role: destination }
+  - { type: ip, value: 10.20.14.88, role: source }
+  - { type: host, value: WS-FIN-0142, role: source }
+  - { type: user, value: l.hassan, role: actor }
+techniques: [T1071.001, T1573]
+notes: Known-bad C2 IP in mock TI; prior TP on this host in history seed.

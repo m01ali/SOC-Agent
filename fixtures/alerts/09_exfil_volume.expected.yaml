@@ -1,0 +1,12 @@
+format: cef
+category: exfiltration
+action: escalate
+entities:
+  - { type: ip, value: 10.20.31.7, role: source }
+  - { type: host, value: SRV-DB-02, role: source }
+  - { type: user, value: svc_backup, role: actor }
+  - { type: ip, value: 203.0.113.199, role: destination }
+  - { type: domain, value: transfer.example-cloudshare.net, role: destination }
+  - { type: url, value: "sftp://transfer.example-cloudshare.net/upload" }
+techniques: [T1048]
+notes: Destination IP + domain seeded malicious (file-sharing abuse) in mock TI.

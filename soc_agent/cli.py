@@ -104,6 +104,35 @@ def check() -> None:
 
 
 @app.command()
+def normalize(
+    input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to normalize.")],
+    fmt: Annotated[
+        str | None, typer.Option("--format", help="generic|splunk|elastic|cef|freetext")
+    ] = None,
+    pretty: Annotated[bool, typer.Option("--pretty")] = False,
+) -> None:
+    """Detect the format and print the canonical alert as JSON (spec 03 debugging surface)."""
+    import json
+
+    from soc_agent.ingest import IngestError, load_input
+    from soc_agent.ingest import normalize as normalize_alert
+    from soc_agent.llm.client import MissingAPIKeyError
+
+    try:
+        raw = load_input(input_path)
+        alert = normalize_alert(raw, hint=fmt)  # type: ignore[arg-type]
+    except MissingAPIKeyError as e:
+        _fail(str(e))
+    except IngestError as e:
+        typer.secho(f"✗ {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(2) from e
+
+    payload = alert.model_dump(mode="json")
+    indent = 2 if pretty else None
+    typer.echo(json.dumps(payload, indent=indent, sort_keys=pretty))
+
+
+@app.command()
 def enrich(
     input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to enrich.")],
 ) -> None:
@@ -133,9 +162,20 @@ def eval_cmd() -> None:
 
 
 @app.command()
-def schema() -> None:
-    """Export the output JSON Schema (spec 02)."""
-    _stub("data-contracts-02-spec.md")
+def schema(
+    out: Annotated[Path, typer.Option("--out", help="Output path.")] = Path(
+        "schemas/output.schema.json"
+    ),
+) -> None:
+    """Export the output JSON Schema."""
+    import json
+
+    from soc_agent.models import EnrichmentOutput
+
+    out.parent.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(EnrichmentOutput.model_json_schema(), indent=2, sort_keys=True) + "\n"
+    out.write_text(payload)
+    typer.echo(str(out))
 
 
 def main() -> None:

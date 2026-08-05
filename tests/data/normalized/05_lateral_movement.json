@@ -1,0 +1,33 @@
+{
+  "alert_id": "soc-agent-6df6ff2cb433",
+  "category": "lateral_movement",
+  "dedupe_key": "6df6ff2cb433f73324ae886de8c71d25bcb69e918117bcf5242d32a84ab5e244",
+  "description": "Internal SMB lateral movement",
+  "ingested_at": "2026-07-20T12:00:00Z",
+  "normalization": {
+    "confidence": 1.0,
+    "method": "parser",
+    "warnings": [
+      "year_inferred"
+    ]
+  },
+  "observed_fields": {
+    "dest_host": "FS-CORP-03",
+    "dest_ip": "10.20.30.12",
+    "detail": "admin$ share access",
+    "device_event_class_id": "1043",
+    "device_product": "NDR",
+    "device_vendor": "ExampleCorp",
+    "protocol": "SMB",
+    "src_host": "WS-FIN-0142",
+    "src_ip": "10.20.14.88",
+    "user": "l.hassan"
+  },
+  "occurred_at": "2026-07-19T22:31:02Z",
+  "raw": "<134>Jul 19 22:31:02 siem01 CEF:0|ExampleCorp|NDR|4.2|1043|Internal SMB lateral movement|7|src=10.20.14.88 dst=10.20.30.12 suser=l.hassan shost=WS-FIN-0142 dhost=FS-CORP-03 proto=SMB cs1=admin$ share access cs1Label=detail\n",
+  "severity": 70,
+  "severity_original": "7",
+  "source_system": "cef",
+  "title": "Internal SMB lateral movement",
+  "vendor_rule": "Internal SMB lateral movement"
+}

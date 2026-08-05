@@ -1,0 +1,1 @@
+<134>Jul 20 01:17:45 dlp01 CEF:0|ExampleCorp|DLP|3.1|2207|Unusual outbound data volume|8|src=10.20.31.7 shost=SRV-DB-02 suser=svc_backup dst=203.0.113.199 dhost=transfer.example-cloudshare.net out=18240000000 request=sftp://transfer.example-cloudshare.net/upload cs1=18.2 GB in 40m cs1Label=volume

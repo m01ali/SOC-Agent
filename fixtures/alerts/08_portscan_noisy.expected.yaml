@@ -1,0 +1,8 @@
+format: splunk
+category: reconnaissance
+action: close
+entities:
+  - { type: ip, value: 198.51.100.201, role: source }
+  - { type: ip, value: 10.20.0.15, role: destination }
+techniques: [T1046]
+notes: Rule seeded 95% FP with 40+ firings; source IP unknown in TI.

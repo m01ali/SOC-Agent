@@ -1,0 +1,11 @@
+{
+  "schema": "soc-agent/alert@v1",
+  "alert_id": "SIEM-2026-018377",
+  "title": "DNS queries to newly registered domain",
+  "category": "command_and_control",
+  "severity": "medium",
+  "occurred_at": "2026-07-20T06:25:33Z",
+  "observed_fields": { "src_ip": "10.20.22.41", "src_host": "WS-MKT-0077",
+                       "user": "s.novak", "query": "cdn-metrics-sync.example-analytics.net" },
+  "description": "Host WS-MKT-0077 issued 63 DNS queries for cdn-metrics-sync.example-analytics.net (registered 4 days ago, no proxy category)."
+}

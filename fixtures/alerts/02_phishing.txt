@@ -1,0 +1,5 @@
+FW: suspicious email reported by j.okafor (Finance). Subject "Invoice overdue".
+Link in body: hxxps://payroll-update[.]example-billing[.]net/login
+Attachment invoice_2207.xlsm, sha256 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08.
+User clicked the link on a personal device, unsure about corporate laptop.
+Reported 2026-07-20 08:41 local time.

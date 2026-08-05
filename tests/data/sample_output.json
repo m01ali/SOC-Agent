@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "status": "success",
+  "alert": {
+    "alert_id": "SIEM-2026-018233",
+    "dedupe_key": "f08ca121c3f6eaa89ad890c9b773d535c5bfe0507efc7dd4423531c94b951e05",
+    "source_system": "generic",
+    "vendor_rule": null,
+    "title": "Periodic outbound connections to rare external host",
+    "description": "Host WS-FIN-0142 initiated 412 HTTPS connections to 203.0.113.66 at fixed 60s intervals over 7h. JA3 hash matches no sanctioned software.",
+    "category": "command_and_control",
+    "severity_original": "high",
+    "severity": 75,
+    "occurred_at": "2026-07-19T22:14:05Z",
+    "ingested_at": "2026-07-20T09:02:11Z",
+    "observed_fields": {
+      "src_ip": "10.20.14.88",
+      "src_host": "WS-FIN-0142",
+      "user": "l.hassan",
+      "dest_ip": "203.0.113.66",
+      "dest_port": "443"
+    },
+    "raw": {
+      "schema": "soc-agent/alert@v1",
+      "alert_id": "SIEM-2026-018233",
+      "title": "Periodic outbound connections to rare external host",
+      "category": "command_and_control",
+      "severity": "high",
+      "occurred_at": "2026-07-19T22:14:05Z",
+      "observed_fields": {
+        "src_ip": "10.20.14.88",
+        "src_host": "WS-FIN-0142",
+        "user": "l.hassan",
+        "dest_ip": "203.0.113.66",
+        "dest_port": "443"
+      },
+      "description": "Host WS-FIN-0142 initiated 412 HTTPS connections to 203.0.113.66 at fixed 60s intervals over 7h. JA3 hash matches no sanctioned software."
+    },
+    "normalization": { "method": "parser", "confidence": 1.0, "warnings": [] }
+  },
+  "entities": [
+    { "type": "ip", "value": "203.0.113.66", "role": "destination", "is_internal": false,
+      "confidence": 1.0, "provenance": { "field": "dest_ip", "method": "field_map" } },
+    { "type": "ip", "value": "10.20.14.88", "role": "source", "is_internal": true,
+      "confidence": 1.0, "provenance": { "field": "src_ip", "method": "field_map" } },
+    { "type": "host", "value": "WS-FIN-0142", "role": "source", "confidence": 1.0,
+      "provenance": { "field": "src_host", "method": "field_map" } },
+    { "type": "user", "value": "l.hassan", "role": "actor", "confidence": 1.0,
+      "provenance": { "field": "user", "method": "field_map" } }
+  ],
+  "threat_intel": {
+    "summary": { "iocs_checked": 1, "malicious": 1, "suspicious": 0, "clean": 0,
+                 "unknown": 0, "worst_verdict": "malicious" },
+    "results": [ {
+      "entity": { "type": "ip", "value": "203.0.113.66" },
+      "verdict": "malicious", "score": 95, "sources": ["mock"],
+      "tags": ["c2", "cobalt-strike"], "first_seen": "2026-06-30T00:00:00Z",
+      "last_seen": "2026-07-18T00:00:00Z",
+      "summary": "Flagged as Cobalt Strike C2 by 3 vendors (mock data)."
+    } ]
+  },
+  "related_alerts": {
+    "count": 2, "prior_true_positives": 1, "prior_false_positives": 0, "rule_fp_rate": 0.0,
+    "alerts": [ {
+      "alert_id": "SIEM-2026-017901", "occurred_at": "2026-07-15T03:22:00Z",
+      "title": "EDR: suspicious rundll32 network activity", "severity": 80,
+      "disposition": "true_positive", "shared_entities": ["WS-FIN-0142"],
+      "relation_reason": "same source host within 30d"
+    } ]
+  },
+  "mitre_attack": [
+    { "tactic_id": "TA0011", "tactic": "Command and Control",
+      "technique_id": "T1071.001", "technique_name": "Application Layer Protocol: Web Protocols",
+      "confidence": "high",
+      "evidence": ["412 HTTPS connections at fixed 60s intervals", "destination flagged as Cobalt Strike C2"] },
+    { "tactic_id": "TA0011", "tactic": "Command and Control",
+      "technique_id": "T1573", "technique_name": "Encrypted Channel", "confidence": "medium",
+      "evidence": ["TLS to unsanctioned host, JA3 mismatch with approved software"] }
+  ],
+  "risk": {
+    "score": 86, "band": "escalate",
+    "components": { "ti": 95, "severity": 75, "history": 75 },
+    "weights": { "ti": 0.45, "severity": 0.30, "history": 0.25 }
+  },
+  "recommendation": {
+    "action": "escalate", "priority": "P2", "confidence": "high",
+    "rationale": "Fixed-interval beaconing to a TI-confirmed Cobalt Strike C2 address, from a host with a confirmed true-positive EDR alert five days ago. Pattern and infrastructure both indicate active compromise.",
+    "override_reason": null,
+    "suggested_actions": [
+      "Isolate WS-FIN-0142 from the network",
+      "Block 203.0.113.66 at egress and sinkhole DNS",
+      "Pull EDR process/network timeline for WS-FIN-0142 (last 7 days)",
+      "Review l.hassan account activity and force credential reset"
+    ]
+  },
+  "briefing": {
+    "markdown": "**Likely active C2 beaconing from WS-FIN-0142.** The host made 412 HTTPS connections to 203.0.113.66 at exact 60-second intervals over 7 hours; threat intel identifies the address as Cobalt Strike C2 infrastructure. The same host had a confirmed-malicious EDR detection on Jul 15, so this is unlikely to be a first contact.\n\n- TI: destination IP **malicious** (score 95, tags: c2, cobalt-strike)\n- History: 1 prior **true positive** on this host in the last 30 days\n- ATT&CK: T1071.001 (Web Protocols C2), T1573 (Encrypted Channel)\n\n**Recommendation: escalate (P2).** Isolate the host, block the destination, pull the EDR timeline, and review the user's account activity."
+  },
+  "errors": [],
+  "provenance": {
+    "agent_version": "0.1.0",
+    "models": { "extract": "qwen3.7-max", "map_attack": "qwen3.7-max",
+                "triage": "qwen3.7-max", "brief": "qwen3.7-max" },
+    "ti_providers": ["mock"], "history_store": "sqlite",
+    "started_at": "2026-07-20T09:02:11Z", "duration_ms": 21540,
+    "stage_timings_ms": { "normalize": 12, "extract": 3810, "enrich_ti": 240,
+                          "correlate": 35, "map_attack": 6120, "triage": 5480,
+                          "brief": 4890, "assemble": 18 },
+    "token_usage": { "input_tokens": 10480, "output_tokens": 1930 }
+  }
+}

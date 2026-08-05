@@ -1,0 +1,11 @@
+{
+  "schema": "soc-agent/alert@v1",
+  "alert_id": "SIEM-2026-018233",
+  "title": "Periodic outbound connections to rare external host",
+  "category": "command_and_control",
+  "severity": "high",
+  "occurred_at": "2026-07-19T22:14:05Z",
+  "observed_fields": { "src_ip": "10.20.14.88", "src_host": "WS-FIN-0142",
+                       "user": "l.hassan", "dest_ip": "203.0.113.66", "dest_port": "443" },
+  "description": "Host WS-FIN-0142 initiated 412 HTTPS connections to 203.0.113.66 at fixed 60s intervals over 7h. JA3 hash matches no sanctioned software."
+}

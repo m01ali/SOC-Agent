@@ -1,0 +1,1066 @@
+{
+  "$defs": {
+    "AttackMapping": {
+      "additionalProperties": false,
+      "description": "Final, catalog-validated mapping (code fills tactic/name from the catalog, spec 06).",
+      "properties": {
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "tactic": {
+          "title": "Tactic",
+          "type": "string"
+        },
+        "tactic_id": {
+          "pattern": "^TA\\d{4}$",
+          "title": "Tactic Id",
+          "type": "string"
+        },
+        "technique_id": {
+          "pattern": "^T\\d{4}(\\.\\d{3})?$",
+          "title": "Technique Id",
+          "type": "string"
+        },
+        "technique_name": {
+          "title": "Technique Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tactic_id",
+        "tactic",
+        "technique_id",
+        "technique_name",
+        "confidence",
+        "evidence"
+      ],
+      "title": "AttackMapping",
+      "type": "object"
+    },
+    "Briefing": {
+      "additionalProperties": false,
+      "description": "LLM structured output for the briefing node (spec 07) \u2014 also the final output block.",
+      "properties": {
+        "markdown": {
+          "minLength": 1,
+          "title": "Markdown",
+          "type": "string"
+        }
+      },
+      "required": [
+        "markdown"
+      ],
+      "title": "Briefing",
+      "type": "object"
+    },
+    "Entity": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "is_internal": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Is Internal"
+        },
+        "provenance": {
+          "$ref": "#/$defs/EntityProvenance"
+        },
+        "role": {
+          "default": "unknown",
+          "enum": [
+            "source",
+            "destination",
+            "actor",
+            "target",
+            "unknown"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "ip",
+            "domain",
+            "url",
+            "hash_md5",
+            "hash_sha1",
+            "hash_sha256",
+            "email",
+            "user",
+            "host",
+            "process",
+            "file_path"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value",
+        "confidence",
+        "provenance"
+      ],
+      "title": "Entity",
+      "type": "object"
+    },
+    "EntityProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "method": {
+          "enum": [
+            "field_map",
+            "regex",
+            "llm"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "original_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Original Text"
+        }
+      },
+      "required": [
+        "method"
+      ],
+      "title": "EntityProvenance",
+      "type": "object"
+    },
+    "EntityRef": {
+      "additionalProperties": false,
+      "description": "Minimal (type, value) reference \u2014 used inside TIResult.",
+      "properties": {
+        "type": {
+          "enum": [
+            "ip",
+            "domain",
+            "url",
+            "hash_md5",
+            "hash_sha1",
+            "hash_sha256",
+            "email",
+            "user",
+            "host",
+            "process",
+            "file_path"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ],
+      "title": "EntityRef",
+      "type": "object"
+    },
+    "NormalizationInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "method": {
+          "enum": [
+            "parser",
+            "llm"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "method",
+        "confidence"
+      ],
+      "title": "NormalizationInfo",
+      "type": "object"
+    },
+    "NormalizedAlert": {
+      "additionalProperties": false,
+      "properties": {
+        "alert_id": {
+          "minLength": 1,
+          "title": "Alert Id",
+          "type": "string"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "enum": [
+                "malware",
+                "phishing",
+                "command_and_control",
+                "lateral_movement",
+                "exfiltration",
+                "credential_access",
+                "initial_access",
+                "persistence",
+                "reconnaissance",
+                "policy_violation",
+                "anomaly",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category"
+        },
+        "dedupe_key": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Dedupe Key",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "ingested_at": {
+          "format": "date-time",
+          "title": "Ingested At",
+          "type": "string"
+        },
+        "normalization": {
+          "$ref": "#/$defs/NormalizationInfo"
+        },
+        "observed_fields": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Observed Fields",
+          "type": "object"
+        },
+        "occurred_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Occurred At"
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Raw"
+        },
+        "severity": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Severity",
+          "type": "integer"
+        },
+        "severity_original": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Severity Original"
+        },
+        "source_system": {
+          "enum": [
+            "generic",
+            "splunk",
+            "elastic",
+            "cef",
+            "freetext"
+          ],
+          "title": "Source System",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "vendor_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vendor Rule"
+        }
+      },
+      "required": [
+        "alert_id",
+        "dedupe_key",
+        "source_system",
+        "title",
+        "severity",
+        "ingested_at",
+        "raw",
+        "normalization"
+      ],
+      "title": "NormalizedAlert",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "agent_version": {
+          "title": "Agent Version",
+          "type": "string"
+        },
+        "duration_ms": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Duration Ms",
+          "type": "integer"
+        },
+        "history_store": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "History Store"
+        },
+        "models": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Models",
+          "type": "object"
+        },
+        "stage_timings_ms": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Stage Timings Ms",
+          "type": "object"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "ti_providers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ti Providers",
+          "type": "array"
+        },
+        "token_usage": {
+          "$ref": "#/$defs/TokenUsage"
+        }
+      },
+      "required": [
+        "agent_version",
+        "started_at"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "RelatedAlert": {
+      "additionalProperties": false,
+      "properties": {
+        "alert_id": {
+          "title": "Alert Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "true_positive",
+            "false_positive",
+            "benign",
+            "open",
+            "undetermined"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "relation_reason": {
+          "title": "Relation Reason",
+          "type": "string"
+        },
+        "severity": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Severity",
+          "type": "integer"
+        },
+        "shared_entities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Shared Entities",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "alert_id",
+        "occurred_at",
+        "title",
+        "severity",
+        "disposition",
+        "relation_reason"
+      ],
+      "title": "RelatedAlert",
+      "type": "object"
+    },
+    "RelatedAlertsBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "alerts": {
+          "items": {
+            "$ref": "#/$defs/RelatedAlert"
+          },
+          "title": "Alerts",
+          "type": "array"
+        },
+        "count": {
+          "minimum": 0,
+          "title": "Count",
+          "type": "integer"
+        },
+        "prior_false_positives": {
+          "default": 0,
+          "title": "Prior False Positives",
+          "type": "integer"
+        },
+        "prior_true_positives": {
+          "default": 0,
+          "title": "Prior True Positives",
+          "type": "integer"
+        },
+        "rule_fp_rate": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Fp Rate"
+        }
+      },
+      "required": [
+        "count"
+      ],
+      "title": "RelatedAlertsBlock",
+      "type": "object"
+    },
+    "RiskAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "band": {
+          "enum": [
+            "escalate",
+            "investigate",
+            "close"
+          ],
+          "title": "Band",
+          "type": "string"
+        },
+        "components": {
+          "$ref": "#/$defs/RiskComponents"
+        },
+        "score": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Score",
+          "type": "integer"
+        },
+        "weights": {
+          "$ref": "#/$defs/RiskWeights"
+        }
+      },
+      "required": [
+        "score",
+        "band",
+        "components",
+        "weights"
+      ],
+      "title": "RiskAssessment",
+      "type": "object"
+    },
+    "RiskComponents": {
+      "additionalProperties": false,
+      "properties": {
+        "history": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "History",
+          "type": "integer"
+        },
+        "severity": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Severity",
+          "type": "integer"
+        },
+        "ti": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Ti",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ti",
+        "severity",
+        "history"
+      ],
+      "title": "RiskComponents",
+      "type": "object"
+    },
+    "RiskWeights": {
+      "additionalProperties": false,
+      "properties": {
+        "history": {
+          "title": "History",
+          "type": "number"
+        },
+        "severity": {
+          "title": "Severity",
+          "type": "number"
+        },
+        "ti": {
+          "title": "Ti",
+          "type": "number"
+        }
+      },
+      "required": [
+        "ti",
+        "severity",
+        "history"
+      ],
+      "title": "RiskWeights",
+      "type": "object"
+    },
+    "StageError": {
+      "additionalProperties": false,
+      "properties": {
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "recoverable": {
+          "default": true,
+          "title": "Recoverable",
+          "type": "boolean"
+        },
+        "stage": {
+          "enum": [
+            "ingest",
+            "normalize",
+            "extract",
+            "enrich_ti",
+            "correlate",
+            "map_attack",
+            "triage",
+            "brief",
+            "assemble"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "parse_error",
+            "timeout",
+            "api_error",
+            "provider_error",
+            "schema_validation",
+            "internal"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stage",
+        "type",
+        "detail"
+      ],
+      "title": "StageError",
+      "type": "object"
+    },
+    "TIResult": {
+      "additionalProperties": false,
+      "properties": {
+        "entity": {
+          "$ref": "#/$defs/EntityRef"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error"
+        },
+        "first_seen": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Seen"
+        },
+        "last_seen": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen"
+        },
+        "raw": {
+          "additionalProperties": true,
+          "title": "Raw",
+          "type": "object"
+        },
+        "score": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Score",
+          "type": "integer"
+        },
+        "sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Summary"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        },
+        "verdict": {
+          "enum": [
+            "malicious",
+            "suspicious",
+            "clean",
+            "unknown"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        }
+      },
+      "required": [
+        "verdict",
+        "score",
+        "entity"
+      ],
+      "title": "TIResult",
+      "type": "object"
+    },
+    "TISummary": {
+      "additionalProperties": false,
+      "properties": {
+        "clean": {
+          "default": 0,
+          "title": "Clean",
+          "type": "integer"
+        },
+        "iocs_checked": {
+          "minimum": 0,
+          "title": "Iocs Checked",
+          "type": "integer"
+        },
+        "malicious": {
+          "default": 0,
+          "title": "Malicious",
+          "type": "integer"
+        },
+        "suspicious": {
+          "default": 0,
+          "title": "Suspicious",
+          "type": "integer"
+        },
+        "unknown": {
+          "default": 0,
+          "title": "Unknown",
+          "type": "integer"
+        },
+        "worst_verdict": {
+          "anyOf": [
+            {
+              "enum": [
+                "malicious",
+                "suspicious",
+                "clean",
+                "unknown"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Worst Verdict"
+        }
+      },
+      "required": [
+        "iocs_checked"
+      ],
+      "title": "TISummary",
+      "type": "object"
+    },
+    "ThreatIntelBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/$defs/TIResult"
+          },
+          "title": "Results",
+          "type": "array"
+        },
+        "summary": {
+          "$ref": "#/$defs/TISummary"
+        }
+      },
+      "required": [
+        "summary"
+      ],
+      "title": "ThreatIntelBlock",
+      "type": "object"
+    },
+    "TokenUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "input_tokens": {
+          "default": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "default": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        }
+      },
+      "title": "TokenUsage",
+      "type": "object"
+    },
+    "TriageRecommendation": {
+      "additionalProperties": false,
+      "description": "LLM structured output for the triage node (spec 07) \u2014 also the final output block.",
+      "properties": {
+        "action": {
+          "enum": [
+            "escalate",
+            "investigate",
+            "close"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "override_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Override Reason"
+        },
+        "priority": {
+          "enum": [
+            "P1",
+            "P2",
+            "P3",
+            "P4"
+          ],
+          "title": "Priority",
+          "type": "string"
+        },
+        "rationale": {
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "suggested_actions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Suggested Actions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action",
+        "priority",
+        "confidence",
+        "rationale"
+      ],
+      "title": "TriageRecommendation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "alert": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/NormalizedAlert"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "briefing": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Briefing"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "entities": {
+      "items": {
+        "$ref": "#/$defs/Entity"
+      },
+      "title": "Entities",
+      "type": "array"
+    },
+    "errors": {
+      "items": {
+        "$ref": "#/$defs/StageError"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "mitre_attack": {
+      "items": {
+        "$ref": "#/$defs/AttackMapping"
+      },
+      "title": "Mitre Attack",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "recommendation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TriageRecommendation"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "related_alerts": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RelatedAlertsBlock"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "risk": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RiskAssessment"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "success",
+        "partial",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "threat_intel": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ThreatIntelBlock"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "status",
+    "provenance"
+  ],
+  "title": "EnrichmentOutput",
+  "type": "object"
+}

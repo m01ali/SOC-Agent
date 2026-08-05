@@ -1,0 +1,10 @@
+format: generic
+category: command_and_control
+action: investigate
+entities:
+  - { type: domain, value: cdn-metrics-sync.example-analytics.net }
+  - { type: ip, value: 10.20.22.41, role: source }
+  - { type: host, value: WS-MKT-0077, role: source }
+  - { type: user, value: s.novak, role: actor }
+techniques: [T1071.004]
+notes: Domain seeded suspicious (newly registered) in mock TI.

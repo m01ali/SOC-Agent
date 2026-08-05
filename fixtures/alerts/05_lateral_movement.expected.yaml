@@ -1,0 +1,11 @@
+format: cef
+category: lateral_movement
+action: investigate
+entities:
+  - { type: ip, value: 10.20.14.88, role: source }
+  - { type: ip, value: 10.20.30.12, role: destination }
+  - { type: host, value: WS-FIN-0142, role: source }
+  - { type: host, value: FS-CORP-03, role: destination }
+  - { type: user, value: l.hassan, role: actor }
+techniques: [T1021.002]
+notes: No external IOCs - exercises the no-TI path. Shares host/user with fixture 01.

@@ -1,0 +1,37 @@
+{
+  "alert_id": "scheduler__admin__search__RMD5f9e8d7_at_1753020000_98765",
+  "category": "reconnaissance",
+  "dedupe_key": "561d53f721b7ad4bff3f1387968181db6562e4ebb2d3579d28831c1023c12c69",
+  "description": "portscan: 198.51.100.201 probed 24 tcp ports on 10.20.0.15 within 60s",
+  "ingested_at": "2026-07-20T12:00:00Z",
+  "normalization": {
+    "confidence": 1.0,
+    "method": "parser",
+    "warnings": []
+  },
+  "observed_fields": {
+    "dest_ip": "10.20.0.15",
+    "dest_port_count": "24",
+    "protocol": "tcp",
+    "src_ip": "198.51.100.201"
+  },
+  "occurred_at": "2026-07-20T04:02:00Z",
+  "raw": {
+    "result": {
+      "_raw": "portscan: 198.51.100.201 probed 24 tcp ports on 10.20.0.15 within 60s",
+      "_time": "2026-07-20T04:02:00Z",
+      "dest": "10.20.0.15",
+      "dest_port_count": "24",
+      "src": "198.51.100.201",
+      "transport": "tcp"
+    },
+    "search_name": "Network - Port Scan Detected - Rule",
+    "sid": "scheduler__admin__search__RMD5f9e8d7_at_1753020000_98765",
+    "urgency": "low"
+  },
+  "severity": 25,
+  "severity_original": "low",
+  "source_system": "splunk",
+  "title": "Network - Port Scan Detected - Rule",
+  "vendor_rule": "Network - Port Scan Detected - Rule"
+}

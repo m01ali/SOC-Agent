@@ -1,0 +1,1 @@
+<134>Jul 19 22:31:02 siem01 CEF:0|ExampleCorp|NDR|4.2|1043|Internal SMB lateral movement|7|src=10.20.14.88 dst=10.20.30.12 suser=l.hassan shost=WS-FIN-0142 dhost=FS-CORP-03 proto=SMB cs1=admin$ share access cs1Label=detail

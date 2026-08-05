@@ -1,0 +1,41 @@
+{
+  "alert_id": "scheduler__admin__search__RMD5a1b2c3_at_1753027200_12345",
+  "category": "credential_access",
+  "dedupe_key": "19b0df9936a8e6cd56cf226abf28c341f7bca1ca67953c62379b8c3267f457f6",
+  "description": "2026-07-20T05:12:44Z sshd[2211]: 87 failed password attempts for admin from 198.51.100.23 port 52144 ssh2",
+  "ingested_at": "2026-07-20T12:00:00Z",
+  "normalization": {
+    "confidence": 1.0,
+    "method": "parser",
+    "warnings": []
+  },
+  "observed_fields": {
+    "app": "sshd",
+    "count": "87",
+    "dest_host": "BASTION-01",
+    "dest_ip": "10.20.7.5",
+    "src_ip": "198.51.100.23",
+    "user": "admin"
+  },
+  "occurred_at": "2026-07-20T05:12:44Z",
+  "raw": {
+    "result": {
+      "_raw": "2026-07-20T05:12:44Z sshd[2211]: 87 failed password attempts for admin from 198.51.100.23 port 52144 ssh2",
+      "_time": "2026-07-20T05:12:44Z",
+      "app": "sshd",
+      "count": "87",
+      "dest": "10.20.7.5",
+      "dest_host": "BASTION-01",
+      "src": "198.51.100.23",
+      "user": "admin"
+    },
+    "search_name": "Access - Excessive Failed Logins - Rule",
+    "sid": "scheduler__admin__search__RMD5a1b2c3_at_1753027200_12345",
+    "urgency": "medium"
+  },
+  "severity": 50,
+  "severity_original": "medium",
+  "source_system": "splunk",
+  "title": "Access - Excessive Failed Logins - Rule",
+  "vendor_rule": "Access - Excessive Failed Logins - Rule"
+}

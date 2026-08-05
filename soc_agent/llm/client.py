@@ -13,6 +13,7 @@ from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
 
 from soc_agent.config import get_config
+from soc_agent.llm.cache import maybe_cache
 
 
 class MissingAPIKeyError(RuntimeError):
@@ -33,8 +34,9 @@ def get_llm(node: str, *, structured: type[BaseModel] | None = None):
             "DASHSCOPE_API_KEY is not set. Copy .env.example to .env and add your key."
         )
     cfg = get_config()
+    model = cfg.models.overrides.get(node, cfg.models.default)
     llm = ChatOpenAI(
-        model=cfg.models.overrides.get(node, cfg.models.default),
+        model=model,
         api_key=api_key,
         base_url=cfg.llm.base_url,
         temperature=cfg.llm.temperature,
@@ -43,4 +45,10 @@ def get_llm(node: str, *, structured: type[BaseModel] | None = None):
         max_retries=cfg.llm.max_retries,
         extra_body={"enable_thinking": cfg.llm.enable_thinking},
     )
-    return llm.with_structured_output(structured) if structured else llm
+    runnable = llm.with_structured_output(structured) if structured else llm
+    params = {
+        "temperature": cfg.llm.temperature,
+        "max_tokens": cfg.llm.max_tokens,
+        "enable_thinking": cfg.llm.enable_thinking,
+    }
+    return maybe_cache(runnable, node=node, model=model, structured=structured, params=params)

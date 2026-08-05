@@ -1,0 +1,34 @@
+{
+  "alert_id": "soc-agent-2998c737741e",
+  "category": "exfiltration",
+  "dedupe_key": "2998c737741e7746015df32351ac96e482720f15daa7114fb4a5391d1a2308b2",
+  "description": "Unusual outbound data volume",
+  "ingested_at": "2026-07-20T12:00:00Z",
+  "normalization": {
+    "confidence": 1.0,
+    "method": "parser",
+    "warnings": [
+      "year_inferred"
+    ]
+  },
+  "observed_fields": {
+    "bytes_out": "18240000000",
+    "dest_host": "transfer.example-cloudshare.net",
+    "dest_ip": "203.0.113.199",
+    "device_event_class_id": "2207",
+    "device_product": "DLP",
+    "device_vendor": "ExampleCorp",
+    "src_host": "SRV-DB-02",
+    "src_ip": "10.20.31.7",
+    "url": "sftp://transfer.example-cloudshare.net/upload",
+    "user": "svc_backup",
+    "volume": "18.2 GB in 40m"
+  },
+  "occurred_at": "2026-07-20T01:17:45Z",
+  "raw": "<134>Jul 20 01:17:45 dlp01 CEF:0|ExampleCorp|DLP|3.1|2207|Unusual outbound data volume|8|src=10.20.31.7 shost=SRV-DB-02 suser=svc_backup dst=203.0.113.199 dhost=transfer.example-cloudshare.net out=18240000000 request=sftp://transfer.example-cloudshare.net/upload cs1=18.2 GB in 40m cs1Label=volume\n",
+  "severity": 80,
+  "severity_original": "8",
+  "source_system": "cef",
+  "title": "Unusual outbound data volume",
+  "vendor_rule": "Unusual outbound data volume"
+}

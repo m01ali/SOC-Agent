@@ -1,0 +1,10 @@
+format: splunk
+category: credential_access
+action: investigate
+entities:
+  - { type: ip, value: 198.51.100.23, role: source }
+  - { type: ip, value: 10.20.7.5, role: destination }
+  - { type: host, value: BASTION-01, role: destination }
+  - { type: user, value: admin, role: target }
+techniques: [T1110]
+notes: Source IP unknown to mock TI - lands mid-band by design.

@@ -1,0 +1,10 @@
+{
+  "@timestamp": "2026-07-20T07:02:10.000Z",
+  "event": { "kind": "signal", "category": ["authentication"] },
+  "kibana.alert.rule.name": "Impossible travel - successful sign-ins from distant locations",
+  "kibana.alert.severity": "high",
+  "kibana.alert.reason": "user m.silva signed in from two locations 5400 km apart within 41 minutes; second source 198.51.100.77 (anonymizing VPN range)",
+  "user": { "name": "m.silva" },
+  "source": { "ip": "198.51.100.77" },
+  "host": { "name": "sso-gateway" }
+}

@@ -1,0 +1,20 @@
+{
+  "data": {
+    "content": "OK"
+  },
+  "key": "9911a2a24c5954c8195fad606c762dafbefb21d271bfc5923a50e475dc36cc63",
+  "kind": "ai_message",
+  "model": "qwen3.7-max",
+  "node": "check",
+  "recorded_at": "2026-08-04T19:51:39.681793+00:00",
+  "schema_name": null,
+  "usage_metadata": {
+    "input_token_details": {
+      "cache_read": 0
+    },
+    "input_tokens": 19,
+    "output_token_details": {},
+    "output_tokens": 1,
+    "total_tokens": 20
+  }
+}

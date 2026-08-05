@@ -66,7 +66,6 @@ def test_cli_help_lists_all_commands():
         (["enrich-dir", "alerts/"], "graph-cli-08-spec.md"),
         (["seed"], "enrichment-05-spec.md"),
         (["eval"], "hardening-eval-09-spec.md"),
-        (["schema"], "data-contracts-02-spec.md"),
     ],
 )
 def test_stub_commands_exit_1_with_spec_pointer(args, spec):

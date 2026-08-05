@@ -1,0 +1,44 @@
+{
+  "alert_id": "soc-agent-776c0ac89450",
+  "category": "initial_access",
+  "dedupe_key": "776c0ac89450d1afc443a0705ea459caa3bd0b16056be251c9dfa4b356e2b7b3",
+  "description": "user m.silva signed in from two locations 5400 km apart within 41 minutes; second source 198.51.100.77 (anonymizing VPN range)",
+  "ingested_at": "2026-07-20T12:00:00Z",
+  "normalization": {
+    "confidence": 1.0,
+    "method": "parser",
+    "warnings": []
+  },
+  "observed_fields": {
+    "host": "sso-gateway",
+    "src_ip": "198.51.100.77",
+    "user": "m.silva"
+  },
+  "occurred_at": "2026-07-20T07:02:10Z",
+  "raw": {
+    "@timestamp": "2026-07-20T07:02:10.000Z",
+    "event": {
+      "category": [
+        "authentication"
+      ],
+      "kind": "signal"
+    },
+    "host": {
+      "name": "sso-gateway"
+    },
+    "kibana.alert.reason": "user m.silva signed in from two locations 5400 km apart within 41 minutes; second source 198.51.100.77 (anonymizing VPN range)",
+    "kibana.alert.rule.name": "Impossible travel - successful sign-ins from distant locations",
+    "kibana.alert.severity": "high",
+    "source": {
+      "ip": "198.51.100.77"
+    },
+    "user": {
+      "name": "m.silva"
+    }
+  },
+  "severity": 75,
+  "severity_original": "high",
+  "source_system": "elastic",
+  "title": "Impossible travel - successful sign-ins from distant locations",
+  "vendor_rule": "Impossible travel - successful sign-ins from distant locations"
+}

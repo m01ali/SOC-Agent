@@ -1,0 +1,15 @@
+{
+  "search_name": "Access - Excessive Failed Logins - Rule",
+  "sid": "scheduler__admin__search__RMD5a1b2c3_at_1753027200_12345",
+  "urgency": "medium",
+  "result": {
+    "_time": "2026-07-20T05:12:44Z",
+    "_raw": "2026-07-20T05:12:44Z sshd[2211]: 87 failed password attempts for admin from 198.51.100.23 port 52144 ssh2",
+    "src": "198.51.100.23",
+    "dest": "10.20.7.5",
+    "dest_host": "BASTION-01",
+    "user": "admin",
+    "app": "sshd",
+    "count": "87"
+  }
+}

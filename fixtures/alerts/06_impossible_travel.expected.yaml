@@ -1,0 +1,9 @@
+format: elastic
+category: initial_access
+action: investigate
+entities:
+  - { type: user, value: m.silva, role: target }
+  - { type: ip, value: 198.51.100.77, role: source }
+  - { type: host, value: sso-gateway }
+techniques: [T1078]
+notes: Source IP seeded suspicious (anonymizing VPN) in mock TI.

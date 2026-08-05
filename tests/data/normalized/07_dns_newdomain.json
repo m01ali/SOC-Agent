@@ -1,0 +1,39 @@
+{
+  "alert_id": "SIEM-2026-018377",
+  "category": "command_and_control",
+  "dedupe_key": "2675bfcee87298d3d9a4c7e6559dd4766ac69fb511cbbbe29092ceaec050c398",
+  "description": "Host WS-MKT-0077 issued 63 DNS queries for cdn-metrics-sync.example-analytics.net (registered 4 days ago, no proxy category).",
+  "ingested_at": "2026-07-20T12:00:00Z",
+  "normalization": {
+    "confidence": 1.0,
+    "method": "parser",
+    "warnings": []
+  },
+  "observed_fields": {
+    "query": "cdn-metrics-sync.example-analytics.net",
+    "src_host": "WS-MKT-0077",
+    "src_ip": "10.20.22.41",
+    "user": "s.novak"
+  },
+  "occurred_at": "2026-07-20T06:25:33Z",
+  "raw": {
+    "alert_id": "SIEM-2026-018377",
+    "category": "command_and_control",
+    "description": "Host WS-MKT-0077 issued 63 DNS queries for cdn-metrics-sync.example-analytics.net (registered 4 days ago, no proxy category).",
+    "observed_fields": {
+      "query": "cdn-metrics-sync.example-analytics.net",
+      "src_host": "WS-MKT-0077",
+      "src_ip": "10.20.22.41",
+      "user": "s.novak"
+    },
+    "occurred_at": "2026-07-20T06:25:33Z",
+    "schema": "soc-agent/alert@v1",
+    "severity": "medium",
+    "title": "DNS queries to newly registered domain"
+  },
+  "severity": 50,
+  "severity_original": "medium",
+  "source_system": "generic",
+  "title": "DNS queries to newly registered domain",
+  "vendor_rule": null
+}

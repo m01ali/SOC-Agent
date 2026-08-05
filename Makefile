@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: install test test-llm lint format check lock seed eval schema
+.PHONY: install test test-llm lint format check lock seed eval schema goldens test-llm-refresh
 
 install:            ## editable install + dev tools into existing .venv
 	.venv/bin/pip install -e ".[dev]"
@@ -23,5 +23,14 @@ check:              ## config + key + live endpoint diagnostic (~50 tokens)
 lock:               ## freeze resolved deps for reproducible installs
 	.venv/bin/pip freeze --exclude-editable > requirements.lock
 
-seed eval schema:   ## stubs until specs 02/05/09
+schema:             ## export schemas/output.schema.json
+	.venv/bin/soc-agent schema
+
+goldens:            ## regenerate tests/data/normalized/*.json
+	$(PY) -m pytest tests/unit/test_ingest_goldens.py --update-goldens
+
+test-llm-refresh:   ## re-record the LLM cache (SPENDS TOKENS)
+	$(PY) -m pytest -m llm --refresh-llm-cache
+
+seed eval:          ## stubs until specs 05/09
 	.venv/bin/soc-agent $@
