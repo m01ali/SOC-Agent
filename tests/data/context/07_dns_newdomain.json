@@ -1,0 +1,73 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-017870",
+        "disposition": "undetermined",
+        "occurred_at": "2026-07-14T10:35:00Z",
+        "relation_reason": "same host WS-MKT-0077",
+        "severity": 40,
+        "shared_entities": [
+          "s.novak",
+          "WS-MKT-0077"
+        ],
+        "title": "DNS query to low-reputation domain"
+      }
+    ],
+    "count": 1,
+    "prior_false_positives": 0,
+    "prior_true_positives": 0,
+    "rule_fired_count": null,
+    "rule_fp_rate": null,
+    "shared_entity_count": 1
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "domain",
+          "value": "cdn-metrics-sync.example-analytics.net"
+        },
+        "error": null,
+        "first_seen": "2026-07-18T00:00:00Z",
+        "last_seen": "2026-07-20T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": null,
+              "pulse_count": 1
+            },
+            "vt": {
+              "harmless": 12,
+              "malicious": 0,
+              "suspicious": 3,
+              "undetected": 61
+            },
+            "whois": {
+              "created": "2026-07-18",
+              "registrar": "EXAMPLE-REGISTRAR"
+            }
+          }
+        },
+        "score": 60,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Registered 2 days ago; name pattern consistent with algorithmic generation (mock data).",
+        "tags": [
+          "newly-registered",
+          "dga-like"
+        ],
+        "verdict": "suspicious"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 1,
+      "malicious": 0,
+      "suspicious": 1,
+      "unknown": 0,
+      "worst_verdict": "suspicious"
+    }
+  }
+}

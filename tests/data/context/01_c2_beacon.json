@@ -1,0 +1,80 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-017988",
+        "disposition": "benign",
+        "occurred_at": "2026-07-17T09:14:00Z",
+        "relation_reason": "shared entity 10.20.14.88",
+        "severity": 40,
+        "shared_entities": [
+          "10.20.14.88",
+          "l.hassan"
+        ],
+        "title": "Blocked download from uncategorized site"
+      },
+      {
+        "alert_id": "SIEM-2026-017901",
+        "disposition": "true_positive",
+        "occurred_at": "2026-07-15T03:22:00Z",
+        "relation_reason": "same host WS-FIN-0142",
+        "severity": 80,
+        "shared_entities": [
+          "WS-FIN-0142"
+        ],
+        "title": "EDR: suspicious rundll32 network activity"
+      }
+    ],
+    "count": 2,
+    "prior_false_positives": 0,
+    "prior_true_positives": 1,
+    "rule_fired_count": null,
+    "rule_fp_rate": null,
+    "shared_entity_count": 2
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "ip",
+          "value": "203.0.113.66"
+        },
+        "error": null,
+        "first_seen": "2026-06-30T00:00:00Z",
+        "last_seen": "2026-07-18T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": "TA-EXAMPLE-04",
+              "pulse_count": 7
+            },
+            "vt": {
+              "harmless": 62,
+              "malicious": 3,
+              "suspicious": 1,
+              "undetected": 12
+            }
+          }
+        },
+        "score": 95,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Flagged as Cobalt Strike C2 by 3 vendors (mock data).",
+        "tags": [
+          "c2",
+          "cobalt-strike"
+        ],
+        "verdict": "malicious"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 1,
+      "malicious": 1,
+      "suspicious": 0,
+      "unknown": 0,
+      "worst_verdict": "malicious"
+    }
+  }
+}

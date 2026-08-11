@@ -39,16 +39,46 @@ class LLMConfig(BaseModel):
     max_retries: int = 2
 
 
+# Allowlists (enrichment-05-spec.md §9.3, §17). An unknown name is a ConfigError, never a
+# lazily-imported adapter: this is the POC's guard against an accidental outbound call.
+TI_PROVIDER_NAMES: frozenset[str] = frozenset({"mock", "failing", "timeout"})
+HISTORY_STORE_NAMES: frozenset[str] = frozenset({"sqlite", "memory"})
+
+
 class ThreatIntelConfig(BaseModel):
     providers: list[str] = Field(default_factory=lambda: ["mock"])
     lookup_timeout_s: int = 5
     cache_ttl_s: int = 3600
+    max_concurrency: int = Field(default=10, gt=0)
+    simulate_latency: bool = True
+    seed_path: str = "data/ti_seed.yaml"
+
+    @field_validator("providers")
+    @classmethod
+    def _validate_providers(cls, value: list[str]) -> list[str]:
+        for name in value:
+            if name not in TI_PROVIDER_NAMES:
+                raise ValueError(
+                    f"unknown threat_intel provider {name!r} (known: {sorted(TI_PROVIDER_NAMES)})"
+                )
+        return value
 
 
 class HistoryConfig(BaseModel):
     store: str = "sqlite"
     path: str = "data/history.db"
     window_days: int = 30
+    max_related: int = Field(default=20, gt=0)
+    value_stoplist: list[str] = Field(default_factory=list)
+
+    @field_validator("store")
+    @classmethod
+    def _validate_store(cls, value: str) -> str:
+        if value not in HISTORY_STORE_NAMES:
+            raise ValueError(
+                f"unknown history store {value!r} (known: {sorted(HISTORY_STORE_NAMES)})"
+            )
+        return value
 
 
 class AttackConfig(BaseModel):

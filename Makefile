@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: install test test-llm lint format check lock seed eval schema goldens test-llm-refresh f1
+.PHONY: install test test-llm lint format check lock seed eval schema goldens test-llm-refresh f1 context
 
 install:            ## editable install + dev tools into existing .venv
 	.venv/bin/pip install -e ".[dev]"
@@ -26,9 +26,10 @@ lock:               ## freeze resolved deps for reproducible installs
 schema:             ## export schemas/output.schema.json
 	.venv/bin/soc-agent schema
 
-goldens:            ## regenerate tests/data/normalized/*.json and tests/data/entities/*.json
+goldens:            ## regenerate tests/data/{normalized,entities,context}/*.json
 	SOC_AGENT_LLM_CACHE=replay $(PY) -m pytest \
-	    tests/unit/test_ingest_goldens.py tests/unit/test_extract_goldens.py --update-goldens
+	    tests/unit/test_ingest_goldens.py tests/unit/test_extract_goldens.py \
+	    tests/unit/test_context_goldens.py --update-goldens
 
 f1:                 ## print the extraction F1 table across all fixtures
 	$(PY) -m pytest tests/unit/test_extract_f1.py -q -s
@@ -36,5 +37,11 @@ f1:                 ## print the extraction F1 table across all fixtures
 test-llm-refresh:   ## re-record the LLM cache (SPENDS TOKENS)
 	$(PY) -m pytest -m llm --refresh-llm-cache
 
-seed eval:          ## stubs until specs 05/09
-	.venv/bin/soc-agent $@
+seed:               ## build data/history.db from the deterministic seed
+	.venv/bin/soc-agent seed --force
+
+context:            ## print the TI + history context for one fixture (ALERT=path)
+	.venv/bin/soc-agent context $(or $(ALERT),fixtures/alerts/01_c2_beacon.json) --pretty
+
+eval:               ## stub until spec 09
+	.venv/bin/soc-agent eval

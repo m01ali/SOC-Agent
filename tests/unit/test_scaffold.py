@@ -64,11 +64,11 @@ def test_cli_help_lists_all_commands():
     [
         (["enrich", "x.json"], "graph-cli-08-spec.md"),
         (["enrich-dir", "alerts/"], "graph-cli-08-spec.md"),
-        (["seed"], "enrichment-05-spec.md"),
         (["eval"], "hardening-eval-09-spec.md"),
     ],
 )
 def test_stub_commands_exit_1_with_spec_pointer(args, spec):
+    """`seed` left this list in spec 05; `normalize`/`extract`/`context` were never stubs."""
     result = runner.invoke(app, args)
     assert result.exit_code == 1
     assert spec in result.output

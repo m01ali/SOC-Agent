@@ -1,0 +1,58 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-018050",
+        "disposition": "undetermined",
+        "occurred_at": "2026-07-18T14:05:00Z",
+        "relation_reason": "shared entity 10.20.30.12",
+        "severity": 55,
+        "shared_entities": [
+          "10.20.30.12",
+          "FS-CORP-03"
+        ],
+        "title": "SMB share enumeration on FS-CORP-03"
+      },
+      {
+        "alert_id": "SIEM-2026-017988",
+        "disposition": "benign",
+        "occurred_at": "2026-07-17T09:14:00Z",
+        "relation_reason": "shared entity 10.20.14.88",
+        "severity": 40,
+        "shared_entities": [
+          "10.20.14.88",
+          "l.hassan"
+        ],
+        "title": "Blocked download from uncategorized site"
+      },
+      {
+        "alert_id": "SIEM-2026-017901",
+        "disposition": "true_positive",
+        "occurred_at": "2026-07-15T03:22:00Z",
+        "relation_reason": "same host WS-FIN-0142",
+        "severity": 80,
+        "shared_entities": [
+          "WS-FIN-0142"
+        ],
+        "title": "EDR: suspicious rundll32 network activity"
+      }
+    ],
+    "count": 3,
+    "prior_false_positives": 0,
+    "prior_true_positives": 1,
+    "rule_fired_count": 0,
+    "rule_fp_rate": null,
+    "shared_entity_count": 3
+  },
+  "threat_intel": {
+    "results": [],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 0,
+      "malicious": 0,
+      "suspicious": 0,
+      "unknown": 0,
+      "worst_verdict": null
+    }
+  }
+}

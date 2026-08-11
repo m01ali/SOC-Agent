@@ -54,6 +54,29 @@ def llm_call_counter():
     cache_module.set_active_counter(None)
 
 
+@pytest.fixture(scope="session")
+def seeded_db_path(tmp_path_factory):
+    """A freshly seeded history DB at the corpus epoch (enrichment-05-spec.md §14.1).
+
+    Tests never touch data/history.db: they build their own from the same generator,
+    so the demo DB and the test DB can never diverge.
+    """
+    from soc_agent.providers.history.seed import build_seeded_db
+
+    path = tmp_path_factory.mktemp("history") / "history.db"
+    build_seeded_db(str(path))
+    return str(path)
+
+
+@pytest.fixture
+def history_store(seeded_db_path):
+    from soc_agent.providers.history.sqlite import SqliteHistoryStore
+
+    store = SqliteHistoryStore(seeded_db_path)
+    yield store
+    store.close()
+
+
 @pytest.fixture(autouse=True)
 def _clean_config_state():
     """Config cache/path must never leak between tests."""

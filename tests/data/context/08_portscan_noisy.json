@@ -1,0 +1,236 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-018104",
+        "disposition": "false_positive",
+        "occurred_at": "2026-06-24T19:44:00Z",
+        "relation_reason": "shared entity 10.20.0.15",
+        "severity": 25,
+        "shared_entities": [
+          "10.20.0.15",
+          "198.51.100.201"
+        ],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018103",
+        "disposition": "false_positive",
+        "occurred_at": "2026-06-24T05:33:00Z",
+        "relation_reason": "shared entity 10.20.0.15",
+        "severity": 25,
+        "shared_entities": [
+          "10.20.0.15",
+          "198.51.100.201"
+        ],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018102",
+        "disposition": "false_positive",
+        "occurred_at": "2026-06-23T15:22:00Z",
+        "relation_reason": "shared entity 10.20.0.15",
+        "severity": 25,
+        "shared_entities": [
+          "10.20.0.15",
+          "198.51.100.201"
+        ],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018101",
+        "disposition": "false_positive",
+        "occurred_at": "2026-06-23T01:11:00Z",
+        "relation_reason": "shared entity 10.20.0.15",
+        "severity": 25,
+        "shared_entities": [
+          "10.20.0.15",
+          "198.51.100.201"
+        ],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018100",
+        "disposition": "false_positive",
+        "occurred_at": "2026-06-22T11:00:00Z",
+        "relation_reason": "shared entity 10.20.0.15",
+        "severity": 25,
+        "shared_entities": [
+          "10.20.0.15",
+          "198.51.100.201"
+        ],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018139",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-15T20:09:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018138",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-15T05:58:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018137",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-14T15:47:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018136",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-14T00:36:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018135",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-13T10:25:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018134",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-12T20:14:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018133",
+        "disposition": "true_positive",
+        "occurred_at": "2026-07-12T06:03:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 40,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018132",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-11T14:52:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018131",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-11T00:41:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018130",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-10T10:30:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018129",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-09T20:19:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018128",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-09T06:08:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018127",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-08T14:57:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018126",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-08T00:46:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-018125",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-07T10:35:00Z",
+        "relation_reason": "same rule \"Network - Port Scan Detected - Rule\"",
+        "severity": 25,
+        "shared_entities": [],
+        "title": "Network - Port Scan Detected - Rule"
+      }
+    ],
+    "count": 40,
+    "prior_false_positives": 5,
+    "prior_true_positives": 0,
+    "rule_fired_count": 40,
+    "rule_fp_rate": 0.95,
+    "shared_entity_count": 5
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "ip",
+          "value": "198.51.100.201"
+        },
+        "error": null,
+        "first_seen": null,
+        "last_seen": null,
+        "raw": {},
+        "score": 0,
+        "sources": [
+          "mock"
+        ],
+        "summary": "No source has an opinion on this indicator (mock data).",
+        "tags": [],
+        "verdict": "unknown"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 1,
+      "malicious": 0,
+      "suspicious": 0,
+      "unknown": 1,
+      "worst_verdict": "unknown"
+    }
+  }
+}

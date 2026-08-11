@@ -9,13 +9,18 @@ llm:
   timeout_s: 120
   max_retries: 2           # client-level; plus 1 schema-repair retry at node level
 threat_intel:
-  providers: [mock]
+  providers: [mock]           # allowlist: mock | failing | timeout
   lookup_timeout_s: 5
   cache_ttl_s: 3600
+  max_concurrency: 10         # bounds the asyncio fan-out
+  simulate_latency: true      # deterministic 10-50 ms demo latency
+  seed_path: data/ti_seed.yaml
 history:
-  store: sqlite
+  store: sqlite               # allowlist: sqlite | memory
   path: data/history.db
   window_days: 30
+  max_related: 20             # caps related_alerts.alerts, never the counts
+  value_stoplist: []          # entity values excluded from correlation matching
 attack:
   catalog: data/attack_catalog.json
   candidate_top_k: 12

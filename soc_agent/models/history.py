@@ -38,4 +38,13 @@ class RelatedAlertsBlock(ContractModel):
     prior_true_positives: int = 0
     prior_false_positives: int = 0
     rule_fp_rate: float | None = None
+    # enrichment-05-spec.md §13.2: the ">= 10 firings" precondition of scoring's -25
+    # history deduction. Without it the envelope shows a rate but not the evidence
+    # threshold it was judged against (Architecture §1.3, "every claim is traceable").
+    rule_fired_count: int | None = None
+    # enrichment-05-spec.md §12.5: how many of `count` matched by a *shared entity*
+    # rather than by rule alone. Scoring's "+10 if >= 3 related alerts share entities"
+    # reads this; `count` includes rule-only context matches and would over-award it.
+    # Computed pre-cap, so a display limit can never change the score.
+    shared_entity_count: int = 0
     alerts: list[RelatedAlert] = Field(default_factory=list)

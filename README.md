@@ -25,9 +25,12 @@ make test                    # unit tests (never calls the API)
 
 ```bash
 soc-agent check              # setup diagnostics (implemented)
+soc-agent normalize ALERT    # canonical alert JSON         (spec 03)
+soc-agent extract ALERT      # extracted entities + IOCs    (spec 04)
+soc-agent context ALERT      # threat intel + alert history (spec 05)
+soc-agent seed               # build data/history.db        (spec 05)
 soc-agent enrich ALERT       # single-alert enrichment      (spec 08)
 soc-agent enrich-dir DIR     # batch enrichment             (spec 08)
-soc-agent seed               # build local seed data        (spec 05)
 soc-agent eval               # labeled eval set + metrics   (spec 09)
 soc-agent schema             # export output JSON Schema    (spec 02)
 ```

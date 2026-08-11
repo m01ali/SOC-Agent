@@ -1,0 +1,80 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-017950",
+        "disposition": "undetermined",
+        "occurred_at": "2026-07-16T06:44:00Z",
+        "relation_reason": "same host sso-gateway",
+        "severity": 45,
+        "shared_entities": [
+          "sso-gateway"
+        ],
+        "title": "Sign-in from unfamiliar ASN"
+      },
+      {
+        "alert_id": "SIEM-2026-017710",
+        "disposition": "benign",
+        "occurred_at": "2026-07-08T11:20:00Z",
+        "relation_reason": "same host sso-gateway",
+        "severity": 35,
+        "shared_entities": [
+          "m.silva",
+          "sso-gateway"
+        ],
+        "title": "MFA challenge from new device"
+      }
+    ],
+    "count": 2,
+    "prior_false_positives": 0,
+    "prior_true_positives": 0,
+    "rule_fired_count": 0,
+    "rule_fp_rate": null,
+    "shared_entity_count": 2
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "ip",
+          "value": "198.51.100.77"
+        },
+        "error": null,
+        "first_seen": "2026-05-02T00:00:00Z",
+        "last_seen": "2026-07-20T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": null,
+              "pulse_count": 2
+            },
+            "vt": {
+              "harmless": 51,
+              "malicious": 1,
+              "suspicious": 4,
+              "undetected": 22
+            }
+          }
+        },
+        "score": 60,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Commercial VPN egress node; frequently seen in credential-stuffing (mock data).",
+        "tags": [
+          "vpn",
+          "anonymizer"
+        ],
+        "verdict": "suspicious"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 1,
+      "malicious": 0,
+      "suspicious": 1,
+      "unknown": 0,
+      "worst_verdict": "suspicious"
+    }
+  }
+}

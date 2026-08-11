@@ -1,0 +1,171 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-017840",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-13T16:02:00Z",
+        "relation_reason": "same user j.okafor",
+        "severity": 20,
+        "shared_entities": [
+          "j.okafor"
+        ],
+        "title": "Marketing bulk mail flagged by content filter"
+      },
+      {
+        "alert_id": "SIEM-2026-017815",
+        "disposition": "true_positive",
+        "occurred_at": "2026-07-12T13:30:00Z",
+        "relation_reason": "same user j.okafor",
+        "severity": 85,
+        "shared_entities": [
+          "j.okafor"
+        ],
+        "title": "Credential submission to known phishing page"
+      },
+      {
+        "alert_id": "SIEM-2026-017602",
+        "disposition": "true_positive",
+        "occurred_at": "2026-07-05T08:47:00Z",
+        "relation_reason": "same user j.okafor",
+        "severity": 75,
+        "shared_entities": [
+          "j.okafor"
+        ],
+        "title": "User reported phishing - malicious attachment"
+      },
+      {
+        "alert_id": "SIEM-2026-017455",
+        "disposition": "true_positive",
+        "occurred_at": "2026-06-28T10:11:00Z",
+        "relation_reason": "same user j.okafor",
+        "severity": 80,
+        "shared_entities": [
+          "j.okafor"
+        ],
+        "title": "Phishing email with credential-harvesting link"
+      }
+    ],
+    "count": 4,
+    "prior_false_positives": 1,
+    "prior_true_positives": 3,
+    "rule_fired_count": null,
+    "rule_fp_rate": null,
+    "shared_entity_count": 4
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "url",
+          "value": "https://payroll-update.example-billing.net/login"
+        },
+        "error": null,
+        "first_seen": "2026-07-17T00:00:00Z",
+        "last_seen": "2026-07-20T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": null,
+              "pulse_count": 3
+            },
+            "vt": {
+              "harmless": 48,
+              "malicious": 5,
+              "suspicious": 2,
+              "undetected": 20
+            }
+          }
+        },
+        "score": 90,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Credential-harvesting page imitating a payroll portal (mock data).",
+        "tags": [
+          "phishing",
+          "credential-harvesting"
+        ],
+        "verdict": "malicious"
+      },
+      {
+        "entity": {
+          "type": "domain",
+          "value": "payroll-update.example-billing.net"
+        },
+        "error": null,
+        "first_seen": "2026-07-16T00:00:00Z",
+        "last_seen": "2026-07-20T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": null,
+              "pulse_count": 4
+            },
+            "vt": {
+              "harmless": 45,
+              "malicious": 6,
+              "suspicious": 1,
+              "undetected": 23
+            },
+            "whois": {
+              "created": "2026-07-16",
+              "registrar": "EXAMPLE-REGISTRAR"
+            }
+          }
+        },
+        "score": 90,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Registered 4 days before first use; hosts a credential-harvesting kit (mock data).",
+        "tags": [
+          "phishing",
+          "newly-registered"
+        ],
+        "verdict": "malicious"
+      },
+      {
+        "entity": {
+          "type": "hash_sha256",
+          "value": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+        },
+        "error": null,
+        "first_seen": "2026-07-14T00:00:00Z",
+        "last_seen": "2026-07-20T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": "TA-EXAMPLE-11",
+              "pulse_count": 11
+            },
+            "vt": {
+              "harmless": 0,
+              "malicious": 41,
+              "suspicious": 3,
+              "undetected": 18
+            }
+          }
+        },
+        "score": 95,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Macro-enabled spreadsheet dropping a second-stage loader (mock data).",
+        "tags": [
+          "maldoc",
+          "xlsm-macro"
+        ],
+        "verdict": "malicious"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 3,
+      "malicious": 3,
+      "suspicious": 0,
+      "unknown": 0,
+      "worst_verdict": "malicious"
+    }
+  }
+}

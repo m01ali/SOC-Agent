@@ -1,0 +1,88 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-018012",
+        "disposition": "undetermined",
+        "occurred_at": "2026-07-17T19:03:00Z",
+        "relation_reason": "shared entity 10.20.7.5",
+        "severity": 50,
+        "shared_entities": [
+          "10.20.7.5",
+          "admin"
+        ],
+        "title": "Access - Excessive Failed Logins - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-017902",
+        "disposition": "true_positive",
+        "occurred_at": "2026-07-15T04:55:00Z",
+        "relation_reason": "same host BASTION-01",
+        "severity": 65,
+        "shared_entities": [
+          "BASTION-01"
+        ],
+        "title": "Successful SSH login after failed-login burst"
+      },
+      {
+        "alert_id": "SIEM-2026-017799",
+        "disposition": "false_positive",
+        "occurred_at": "2026-07-11T22:18:00Z",
+        "relation_reason": "same host BASTION-01",
+        "severity": 45,
+        "shared_entities": [
+          "admin",
+          "BASTION-01"
+        ],
+        "title": "Access - Excessive Failed Logins - Rule"
+      },
+      {
+        "alert_id": "SIEM-2026-017733",
+        "disposition": "true_positive",
+        "occurred_at": "2026-07-09T02:41:00Z",
+        "relation_reason": "same host BASTION-01",
+        "severity": 70,
+        "shared_entities": [
+          "admin",
+          "BASTION-01"
+        ],
+        "title": "Successful login after failed-login burst"
+      }
+    ],
+    "count": 4,
+    "prior_false_positives": 1,
+    "prior_true_positives": 2,
+    "rule_fired_count": 3,
+    "rule_fp_rate": 0.5,
+    "shared_entity_count": 4
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "ip",
+          "value": "198.51.100.23"
+        },
+        "error": null,
+        "first_seen": null,
+        "last_seen": null,
+        "raw": {},
+        "score": 0,
+        "sources": [
+          "mock"
+        ],
+        "summary": "No source has an opinion on this indicator (mock data).",
+        "tags": [],
+        "verdict": "unknown"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 1,
+      "malicious": 0,
+      "suspicious": 0,
+      "unknown": 1,
+      "worst_verdict": "unknown"
+    }
+  }
+}

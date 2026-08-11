@@ -1,0 +1,333 @@
+# Mock threat-intel seed. Spec: enrichment-05-spec.md §6.
+#
+# Hygiene (Architecture §7.1, §10.3): external IPs come only from the RFC 5737
+# documentation ranges, domains are invented `example-*` names, hashes are random
+# hex. Nothing here is a real indicator.
+#
+# `raw` mirrors VirusTotal's `last_analysis_stats` and OTX's pulse summary so the
+# post-POC adapters (Architecture §7.3) populate the same field with genuinely
+# similar data and nothing downstream changes.
+#
+# Verdict/score bands are validated at load (§6.2):
+#   malicious 85-100 · suspicious 40-70 · clean 0-10 · unknown 0
+version: 1
+defaults:
+  sources: [mock]
+
+entries:
+  # ---- fixture 01: C2 beacon -------------------------------------------------
+  - type: ip
+    value: 203.0.113.66
+    verdict: malicious
+    score: 95
+    tags: [c2, cobalt-strike]
+    first_seen: 2026-06-30T00:00:00Z
+    last_seen: 2026-07-18T00:00:00Z
+    summary: Flagged as Cobalt Strike C2 by 3 vendors (mock data).
+    raw:
+      vt: { malicious: 3, suspicious: 1, harmless: 62, undetected: 12 }
+      otx: { pulse_count: 7, adversary: TA-EXAMPLE-04 }
+
+  # ---- fixture 02: phishing --------------------------------------------------
+  - type: url
+    value: https://payroll-update.example-billing.net/login
+    verdict: malicious
+    score: 90
+    tags: [phishing, credential-harvesting]
+    first_seen: 2026-07-17T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Credential-harvesting page imitating a payroll portal (mock data).
+    raw:
+      vt: { malicious: 5, suspicious: 2, harmless: 48, undetected: 20 }
+      otx: { pulse_count: 3, adversary: null }
+
+  - type: domain
+    value: payroll-update.example-billing.net
+    verdict: malicious
+    score: 90
+    tags: [phishing, newly-registered]
+    first_seen: 2026-07-16T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Registered 4 days before first use; hosts a credential-harvesting kit (mock data).
+    raw:
+      vt: { malicious: 6, suspicious: 1, harmless: 45, undetected: 23 }
+      otx: { pulse_count: 4, adversary: null }
+      whois: { created: 2026-07-16, registrar: EXAMPLE-REGISTRAR }
+
+  - type: hash_sha256
+    value: 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+    verdict: malicious
+    score: 95
+    tags: [maldoc, xlsm-macro]
+    first_seen: 2026-07-14T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Macro-enabled spreadsheet dropping a second-stage loader (mock data).
+    raw:
+      vt: { malicious: 41, suspicious: 3, harmless: 0, undetected: 18 }
+      otx: { pulse_count: 11, adversary: TA-EXAMPLE-11 }
+
+  # ---- fixture 04: malware hash, actually a clean admin tool -----------------
+  - type: hash_sha256
+    value: 4c2fa1e0b93f7d6c815e2a9d03b46c7f5a8e91d2c30b4f6a7d8e9f0a1b2c3d4e
+    verdict: clean
+    score: 0
+    tags: [sysinternals, admin-tool]
+    first_seen: 2024-02-11T00:00:00Z
+    last_seen: 2026-07-19T00:00:00Z
+    summary: Signed process-management utility in wide legitimate use (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 0, harmless: 71, undetected: 3 }
+      otx: { pulse_count: 0, adversary: null }
+
+  # ---- fixture 06: impossible travel ----------------------------------------
+  - type: ip
+    value: 198.51.100.77
+    verdict: suspicious
+    score: 60
+    tags: [vpn, anonymizer]
+    first_seen: 2026-05-02T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Commercial VPN egress node; frequently seen in credential-stuffing (mock data).
+    raw:
+      vt: { malicious: 1, suspicious: 4, harmless: 51, undetected: 22 }
+      otx: { pulse_count: 2, adversary: null }
+
+  # ---- fixture 07: newly registered DNS destination -------------------------
+  - type: domain
+    value: cdn-metrics-sync.example-analytics.net
+    verdict: suspicious
+    score: 60
+    tags: [newly-registered, dga-like]
+    first_seen: 2026-07-18T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Registered 2 days ago; name pattern consistent with algorithmic generation (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 3, harmless: 12, undetected: 61 }
+      otx: { pulse_count: 1, adversary: null }
+      whois: { created: 2026-07-18, registrar: EXAMPLE-REGISTRAR }
+
+  # ---- fixture 09: exfiltration ---------------------------------------------
+  - type: ip
+    value: 203.0.113.199
+    verdict: malicious
+    score: 90
+    tags: [exfil, file-sharing-abuse]
+    first_seen: 2026-04-08T00:00:00Z
+    last_seen: 2026-07-19T00:00:00Z
+    summary: Hosting endpoint repeatedly used to stage exfiltrated archives (mock data).
+    raw:
+      vt: { malicious: 8, suspicious: 2, harmless: 40, undetected: 28 }
+      otx: { pulse_count: 6, adversary: TA-EXAMPLE-07 }
+
+  - type: domain
+    value: transfer.example-cloudshare.net
+    verdict: malicious
+    score: 85
+    tags: [exfil, file-sharing-abuse]
+    first_seen: 2026-04-08T00:00:00Z
+    last_seen: 2026-07-19T00:00:00Z
+    summary: File-sharing service with no corporate sanction; abused for data staging (mock data).
+    raw:
+      vt: { malicious: 7, suspicious: 3, harmless: 44, undetected: 24 }
+      otx: { pulse_count: 5, adversary: TA-EXAMPLE-07 }
+
+  # Seeded explicitly, not inherited from its host: deriving a URL verdict from its
+  # domain is inference dressed as intelligence, and it would make `sources` a lie
+  # for a lookup that never happened (§6.3).
+  - type: url
+    value: sftp://transfer.example-cloudshare.net/upload
+    verdict: malicious
+    score: 85
+    tags: [exfil, file-sharing-abuse]
+    first_seen: 2026-05-30T00:00:00Z
+    last_seen: 2026-07-19T00:00:00Z
+    summary: Upload endpoint observed receiving multi-GB archives from compromised hosts (mock data).
+    raw:
+      vt: { malicious: 4, suspicious: 2, harmless: 30, undetected: 40 }
+      otx: { pulse_count: 5, adversary: TA-EXAMPLE-07 }
+
+  # ---- fixture 10: injection fixture ----------------------------------------
+  # Capped at 60 on purpose. At 70 the projected risk reads 71.0 and escalates,
+  # contradicting the fixture's `investigate` label (§16.2). Do not raise.
+  - type: ip
+    value: 203.0.113.150
+    verdict: suspicious
+    score: 60
+    tags: [suspicious-tls, recent-c2-adjacent]
+    first_seen: 2026-07-11T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Self-signed TLS on a non-standard port; adjacent to known C2 infrastructure (mock data).
+    raw:
+      vt: { malicious: 2, suspicious: 5, harmless: 38, undetected: 33 }
+      otx: { pulse_count: 2, adversary: null }
+
+  # NOTE: 198.51.100.23 (fixture 03) and 198.51.100.201 (fixture 08) are deliberately
+  # absent — their labels read "unknown to mock TI", and `unknown` is the most common
+  # verdict in a real deployment, so the corpus must cover it (§6.3).
+
+  # ---- decoys ----------------------------------------------------------------
+  # So the seed is not a lookup table with exactly one row per fixture: a
+  # "matches everything" bug has somewhere to show up.
+  - type: ip
+    value: 203.0.113.10
+    verdict: malicious
+    score: 88
+    tags: [scanner, brute-force]
+    first_seen: 2026-03-01T00:00:00Z
+    last_seen: 2026-07-12T00:00:00Z
+    summary: Long-running SSH brute-force source (mock data).
+    raw:
+      vt: { malicious: 9, suspicious: 1, harmless: 40, undetected: 28 }
+
+  - type: ip
+    value: 203.0.113.44
+    verdict: suspicious
+    score: 55
+    tags: [tor-exit]
+    first_seen: 2026-01-19T00:00:00Z
+    last_seen: 2026-07-17T00:00:00Z
+    summary: Tor exit node (mock data).
+    raw:
+      vt: { malicious: 1, suspicious: 6, harmless: 47, undetected: 24 }
+
+  - type: ip
+    value: 198.51.100.5
+    verdict: clean
+    score: 5
+    tags: [cdn]
+    first_seen: 2023-06-01T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Content-delivery edge node (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 0, harmless: 68, undetected: 6 }
+
+  - type: ip
+    value: 192.0.2.30
+    verdict: suspicious
+    score: 48
+    tags: [bulletproof-hosting]
+    first_seen: 2026-02-14T00:00:00Z
+    last_seen: 2026-07-09T00:00:00Z
+    summary: Netblock with a history of abuse complaints (mock data).
+    raw:
+      vt: { malicious: 2, suspicious: 3, harmless: 51, undetected: 18 }
+
+  - type: ip
+    value: 192.0.2.77
+    verdict: malicious
+    score: 92
+    tags: [c2, ratel]
+    first_seen: 2026-06-02T00:00:00Z
+    last_seen: 2026-07-15T00:00:00Z
+    summary: Commodity RAT controller (mock data).
+    raw:
+      vt: { malicious: 12, suspicious: 2, harmless: 33, undetected: 27 }
+
+  - type: domain
+    value: updates.example-softsync.test
+    verdict: malicious
+    score: 87
+    tags: [malware-distribution]
+    first_seen: 2026-05-21T00:00:00Z
+    last_seen: 2026-07-16T00:00:00Z
+    summary: Fake software-update host distributing a loader (mock data).
+    raw:
+      vt: { malicious: 10, suspicious: 1, harmless: 39, undetected: 24 }
+
+  - type: domain
+    value: login-verify.example-mail.test
+    verdict: malicious
+    score: 91
+    tags: [phishing, credential-harvesting]
+    first_seen: 2026-06-25T00:00:00Z
+    last_seen: 2026-07-05T00:00:00Z
+    summary: Credential-harvesting page seen in a prior campaign against this org (mock data).
+    raw:
+      vt: { malicious: 14, suspicious: 0, harmless: 35, undetected: 25 }
+      otx: { pulse_count: 8, adversary: TA-EXAMPLE-11 }
+
+  - type: domain
+    value: ads-tracker.example-cdn.test
+    verdict: suspicious
+    score: 42
+    tags: [adware, low-reputation]
+    first_seen: 2026-01-05T00:00:00Z
+    last_seen: 2026-07-14T00:00:00Z
+    summary: Ad-tracking host with a poor reputation but no confirmed malware (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 4, harmless: 44, undetected: 26 }
+
+  - type: domain
+    value: mirror.example-opensource.test
+    verdict: clean
+    score: 2
+    tags: [software-mirror]
+    first_seen: 2022-11-30T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: Well-known open-source package mirror (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 0, harmless: 70, undetected: 4 }
+
+  - type: url
+    value: http://updates.example-softsync.test/patch/setup.exe
+    verdict: malicious
+    score: 89
+    tags: [malware-distribution, loader]
+    first_seen: 2026-05-21T00:00:00Z
+    last_seen: 2026-07-16T00:00:00Z
+    summary: Direct download URL for the loader (mock data).
+    raw:
+      vt: { malicious: 11, suspicious: 1, harmless: 36, undetected: 26 }
+
+  - type: hash_sha256
+    value: 1b7e4f2a90c3d85f6a1e0b4c7d29e83f5a06b1c4d7e2f9a0b3c6d1e4f7a2b5c8
+    verdict: malicious
+    score: 93
+    tags: [loader, obfuscated]
+    first_seen: 2026-05-22T00:00:00Z
+    last_seen: 2026-07-16T00:00:00Z
+    summary: Obfuscated .NET loader (mock data).
+    raw:
+      vt: { malicious: 48, suspicious: 2, harmless: 0, undetected: 12 }
+
+  - type: hash_sha1
+    value: da39a3ee5e6b4b0d3255bfef95601890afd80709
+    verdict: clean
+    score: 0
+    tags: [empty-file]
+    first_seen: 2020-01-01T00:00:00Z
+    last_seen: 2026-07-20T00:00:00Z
+    summary: SHA-1 of the empty file; benign by definition (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 0, harmless: 74, undetected: 0 }
+
+  - type: hash_md5
+    value: 5d41402abc4b2a76b9719d911017c592
+    verdict: suspicious
+    score: 45
+    tags: [packed, low-prevalence]
+    first_seen: 2026-06-11T00:00:00Z
+    last_seen: 2026-07-08T00:00:00Z
+    summary: Packed binary with very low prevalence; no confirmed detonation (mock data).
+    raw:
+      vt: { malicious: 3, suspicious: 6, harmless: 12, undetected: 53 }
+
+  - type: hash_sha256
+    value: 6f2c8b1d4e7a0359c8b2f5e1a4d7069b3c6e9f2a5d8b1c4e7f0a3d6b9c2e5f80
+    verdict: clean
+    score: 8
+    tags: [signed, vendor-tool]
+    first_seen: 2025-03-17T00:00:00Z
+    last_seen: 2026-07-19T00:00:00Z
+    summary: Signed vendor diagnostic tool (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 1, harmless: 66, undetected: 7 }
+
+  - type: hash_sha256
+    value: 3e9d0a5c8f1b4e7206d9a3c6f0b5e8d1a4c7f2b5e8d1a4c7f0b3e6d9a2c5f8b1
+    verdict: unknown
+    score: 0
+    tags: []
+    summary: No source has an opinion on this sample (mock data).
+    raw:
+      vt: { malicious: 0, suspicious: 0, harmless: 0, undetected: 0 }

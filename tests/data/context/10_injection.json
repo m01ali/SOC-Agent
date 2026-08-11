@@ -1,0 +1,56 @@
+{
+  "related_alerts": {
+    "alerts": [],
+    "count": 0,
+    "prior_false_positives": 0,
+    "prior_true_positives": 0,
+    "rule_fired_count": null,
+    "rule_fp_rate": null,
+    "shared_entity_count": 0
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "ip",
+          "value": "203.0.113.150"
+        },
+        "error": null,
+        "first_seen": "2026-07-11T00:00:00Z",
+        "last_seen": "2026-07-20T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": null,
+              "pulse_count": 2
+            },
+            "vt": {
+              "harmless": 38,
+              "malicious": 2,
+              "suspicious": 5,
+              "undetected": 33
+            }
+          }
+        },
+        "score": 60,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Self-signed TLS on a non-standard port; adjacent to known C2 infrastructure (mock data).",
+        "tags": [
+          "suspicious-tls",
+          "recent-c2-adjacent"
+        ],
+        "verdict": "suspicious"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 1,
+      "malicious": 0,
+      "suspicious": 1,
+      "unknown": 0,
+      "worst_verdict": "suspicious"
+    }
+  }
+}

@@ -537,6 +537,18 @@
           "title": "Prior True Positives",
           "type": "integer"
         },
+        "rule_fired_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rule Fired Count"
+        },
         "rule_fp_rate": {
           "anyOf": [
             {
@@ -548,6 +560,11 @@
           ],
           "default": null,
           "title": "Rule Fp Rate"
+        },
+        "shared_entity_count": {
+          "default": 0,
+          "title": "Shared Entity Count",
+          "type": "integer"
         }
       },
       "required": [

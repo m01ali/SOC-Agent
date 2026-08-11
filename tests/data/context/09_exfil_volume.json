@@ -1,0 +1,135 @@
+{
+  "related_alerts": {
+    "alerts": [
+      {
+        "alert_id": "SIEM-2026-017520",
+        "disposition": "benign",
+        "occurred_at": "2026-07-02T23:50:00Z",
+        "relation_reason": "same host SRV-DB-02",
+        "severity": 30,
+        "shared_entities": [
+          "SRV-DB-02",
+          "svc_backup"
+        ],
+        "title": "Scheduled backup transfer volume spike"
+      }
+    ],
+    "count": 1,
+    "prior_false_positives": 0,
+    "prior_true_positives": 0,
+    "rule_fired_count": 0,
+    "rule_fp_rate": null,
+    "shared_entity_count": 1
+  },
+  "threat_intel": {
+    "results": [
+      {
+        "entity": {
+          "type": "ip",
+          "value": "203.0.113.199"
+        },
+        "error": null,
+        "first_seen": "2026-04-08T00:00:00Z",
+        "last_seen": "2026-07-19T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": "TA-EXAMPLE-07",
+              "pulse_count": 6
+            },
+            "vt": {
+              "harmless": 40,
+              "malicious": 8,
+              "suspicious": 2,
+              "undetected": 28
+            }
+          }
+        },
+        "score": 90,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Hosting endpoint repeatedly used to stage exfiltrated archives (mock data).",
+        "tags": [
+          "exfil",
+          "file-sharing-abuse"
+        ],
+        "verdict": "malicious"
+      },
+      {
+        "entity": {
+          "type": "domain",
+          "value": "transfer.example-cloudshare.net"
+        },
+        "error": null,
+        "first_seen": "2026-04-08T00:00:00Z",
+        "last_seen": "2026-07-19T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": "TA-EXAMPLE-07",
+              "pulse_count": 5
+            },
+            "vt": {
+              "harmless": 44,
+              "malicious": 7,
+              "suspicious": 3,
+              "undetected": 24
+            }
+          }
+        },
+        "score": 85,
+        "sources": [
+          "mock"
+        ],
+        "summary": "File-sharing service with no corporate sanction; abused for data staging (mock data).",
+        "tags": [
+          "exfil",
+          "file-sharing-abuse"
+        ],
+        "verdict": "malicious"
+      },
+      {
+        "entity": {
+          "type": "url",
+          "value": "sftp://transfer.example-cloudshare.net/upload"
+        },
+        "error": null,
+        "first_seen": "2026-05-30T00:00:00Z",
+        "last_seen": "2026-07-19T00:00:00Z",
+        "raw": {
+          "mock": {
+            "otx": {
+              "adversary": "TA-EXAMPLE-07",
+              "pulse_count": 5
+            },
+            "vt": {
+              "harmless": 30,
+              "malicious": 4,
+              "suspicious": 2,
+              "undetected": 40
+            }
+          }
+        },
+        "score": 85,
+        "sources": [
+          "mock"
+        ],
+        "summary": "Upload endpoint observed receiving multi-GB archives from compromised hosts (mock data).",
+        "tags": [
+          "exfil",
+          "file-sharing-abuse"
+        ],
+        "verdict": "malicious"
+      }
+    ],
+    "summary": {
+      "clean": 0,
+      "iocs_checked": 3,
+      "malicious": 3,
+      "suspicious": 0,
+      "unknown": 0,
+      "worst_verdict": "malicious"
+    }
+  }
+}

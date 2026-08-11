@@ -174,6 +174,69 @@ def extract(
 
 
 @app.command()
+def context(
+    input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to enrich.")],
+    fmt: Annotated[
+        str | None, typer.Option("--format", help="generic|splunk|elastic|cef|freetext")
+    ] = None,
+    no_ti: Annotated[bool, typer.Option("--no-ti", help="Skip threat-intel lookups.")] = False,
+    no_history: Annotated[
+        bool, typer.Option("--no-history", help="Skip historical correlation.")
+    ] = False,
+    pretty: Annotated[bool, typer.Option("--pretty")] = False,
+) -> None:
+    """Normalize, extract, then print the TI and history context as JSON (spec 05 surface)."""
+    import json
+
+    from soc_agent.extract import extract_entities, ioc_entities
+    from soc_agent.ingest import IngestError, load_input
+    from soc_agent.ingest import normalize as normalize_alert
+    from soc_agent.llm.client import MissingAPIKeyError
+    from soc_agent.providers.history import correlate
+    from soc_agent.providers.ti import enrich_ti_sync
+
+    cfg = get_config()
+    try:
+        raw = load_input(input_path)
+        alert = normalize_alert(raw, hint=fmt)  # type: ignore[arg-type]
+        extraction = extract_entities(alert)
+    except MissingAPIKeyError as e:
+        _fail(str(e))
+    except IngestError as e:
+        typer.secho(f"✗ {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(2) from e
+
+    errors = [e.model_dump(mode="json") for e in extraction.errors]
+
+    threat_intel = None
+    ti_providers: list[str] = []
+    if not no_ti:
+        ti = enrich_ti_sync(extraction.entities, config=cfg.threat_intel)
+        threat_intel = ti.block.model_dump(mode="json")
+        ti_providers = ti.providers_used
+        errors += [e.model_dump(mode="json") for e in ti.errors]
+
+    related = None
+    history_store = None
+    if not no_history:
+        correlation = correlate(alert, extraction.entities, config=cfg.history)
+        related = correlation.block.model_dump(mode="json")
+        history_store = correlation.store_name
+        errors += [e.model_dump(mode="json") for e in correlation.errors]
+
+    payload = {
+        "alert_id": alert.alert_id,
+        "iocs": [e.value for e in ioc_entities(extraction.entities)],
+        "threat_intel": threat_intel,
+        "related_alerts": related,
+        "errors": errors,
+        "providers": {"ti": ti_providers, "history": history_store},
+    }
+    indent = 2 if pretty else None
+    typer.echo(json.dumps(payload, indent=indent, sort_keys=pretty))
+
+
+@app.command()
 def enrich(
     input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to enrich.")],
 ) -> None:
@@ -191,9 +254,43 @@ def enrich_dir(
 
 
 @app.command()
-def seed() -> None:
-    """Build local seed data: history.db and caches (spec 05)."""
-    _stub("enrichment-05-spec.md")
+def seed(
+    force: Annotated[
+        bool, typer.Option("--force", help="Overwrite an existing history.db.")
+    ] = False,
+    epoch: Annotated[
+        str | None,
+        typer.Option("--epoch", help="ISO-8601 corpus epoch (default 2026-07-20T12:00:00Z)."),
+    ] = None,
+) -> None:
+    """Build local seed data: data/history.db (spec 05)."""
+    from datetime import datetime
+
+    from soc_agent.providers.history.seed import CORPUS_EPOCH, build_seeded_db
+
+    cfg = get_config()
+    path = Path(cfg.history.path)
+    if path.exists():
+        if not force:
+            _fail(f"{path} already exists — pass --force to rebuild it.")
+        path.unlink()
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    anchor = CORPUS_EPOCH
+    if epoch is not None:
+        try:
+            anchor = datetime.fromisoformat(epoch.replace("Z", "+00:00"))
+        except ValueError as e:
+            raise typer.BadParameter(f"--epoch must be ISO-8601: {epoch!r}") from e
+        if anchor.tzinfo is None:
+            raise typer.BadParameter("--epoch must carry a timezone offset")
+
+    summary = build_seeded_db(str(path), epoch=anchor)
+    typer.secho(f"✓ seeded {summary.alerts} alerts into {path}", fg=typer.colors.GREEN, err=True)
+    typer.secho(f"  epoch:        {summary.epoch}", err=True)
+    typer.secho(f"  rules:        {len(summary.rules)}", err=True)
+    for disposition, count in sorted(summary.dispositions.items()):
+        typer.secho(f"  {disposition + ':':<14}{count}", err=True)
 
 
 @app.command(name="eval")
