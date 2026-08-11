@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: install test test-llm lint format check lock seed eval schema goldens test-llm-refresh f1 context
+.PHONY: install test test-llm lint format check lock seed eval schema goldens test-llm-refresh f1 context attack attack-recall catalog
 
 install:            ## editable install + dev tools into existing .venv
 	.venv/bin/pip install -e ".[dev]"
@@ -42,6 +42,15 @@ seed:               ## build data/history.db from the deterministic seed
 
 context:            ## print the TI + history context for one fixture (ALERT=path)
 	.venv/bin/soc-agent context $(or $(ALERT),fixtures/alerts/01_c2_beacon.json) --pretty
+
+attack:             ## print the ATT&CK mapping for one fixture (ALERT=path)
+	.venv/bin/soc-agent attack $(or $(ALERT),fixtures/alerts/01_c2_beacon.json) --pretty --candidates
+
+attack-recall:      ## print the shortlist-recall and top-3 tables
+	$(PY) -m pytest tests/unit/test_attack_shortlist.py tests/unit/test_attack_score.py -q -s
+
+catalog:            ## rebuild data/attack_catalog.json from the official STIX bundle (NETWORK)
+	$(PY) scripts/build_attack_catalog.py --out data/attack_catalog.json
 
 eval:               ## stub until spec 09
 	.venv/bin/soc-agent eval

@@ -1,0 +1,116 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "rule_hint",
+        "summary",
+        "tactic"
+      ],
+      "score": 104.5,
+      "technique_id": "T1048"
+    },
+    {
+      "reasons": [
+        "keyword:file-sharing",
+        "summary",
+        "tactic"
+      ],
+      "score": 12.5,
+      "technique_id": "T1567"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 8.5,
+      "technique_id": "T1537"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1030"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 4.5,
+      "technique_id": "T1006"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1011"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1011.001"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1020"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1020.001"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1029"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1041"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1048.001"
+    }
+  ],
+  "rule_hint_mappings": [
+    {
+      "confidence": "low",
+      "evidence": [
+        "matched rule hint for 'Unusual outbound data volume'"
+      ],
+      "tactic": "Exfiltration",
+      "tactic_id": "TA0010",
+      "technique_id": "T1048",
+      "technique_name": "Exfiltration Over Alternative Protocol"
+    }
+  ]
+}

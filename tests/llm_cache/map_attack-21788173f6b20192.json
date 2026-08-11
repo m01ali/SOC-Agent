@@ -1,0 +1,29 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "title: Network - Port Scan Detected - Rule",
+          "description: portscan: 198.51.100.201 probed 24 tcp ports on 10.20.0.15 within 60s"
+        ],
+        "technique_id": "T1046"
+      },
+      {
+        "confidence": "medium",
+        "evidence": [
+          "description: portscan: 198.51.100.201 probed 24 tcp ports on 10.20.0.15 within 60s",
+          "title: Network - Port Scan Detected - Rule"
+        ],
+        "technique_id": "T1595.001"
+      }
+    ]
+  },
+  "key": "21788173f6b2019276be8e99f8819097c8bf0a3d25b0ddeae0ec1a5426732d83",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:27.597618+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

@@ -1,0 +1,112 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "keyword:dns queries",
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 16.0,
+      "technique_id": "T1071.004"
+    },
+    {
+      "reasons": [
+        "keyword:proxy",
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 15.5,
+      "technique_id": "T1090"
+    },
+    {
+      "reasons": [
+        "keyword:dga",
+        "tactic"
+      ],
+      "score": 12.0,
+      "technique_id": "T1568"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 11.0,
+      "technique_id": "T1090.004"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 8.0,
+      "technique_id": "T1568.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1090.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1090.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1090.003"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1568.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1568.003"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1095"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1102.001"
+    }
+  ],
+  "rule_hint_mappings": []
+}

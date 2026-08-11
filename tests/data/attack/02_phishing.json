@@ -1,0 +1,113 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "keyword:phishing",
+        "keyword:malicious link",
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 27.5,
+      "technique_id": "T1566.002"
+    },
+    {
+      "reasons": [
+        "keyword:clicked the link",
+        "keyword:user clicked",
+        "name",
+        "summary"
+      ],
+      "score": 26.5,
+      "technique_id": "T1204.001"
+    },
+    {
+      "reasons": [
+        "keyword:xlsm",
+        "name",
+        "summary"
+      ],
+      "score": 15.5,
+      "technique_id": "T1204.002"
+    },
+    {
+      "reasons": [
+        "keyword:suspicious email",
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 15.5,
+      "technique_id": "T1566"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 11.5,
+      "technique_id": "T1566.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1078.003"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 7.5,
+      "technique_id": "T1114.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1566.003"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1566.004"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 7.0,
+      "technique_id": "T1204.003"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 7.0,
+      "technique_id": "T1204.005"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 7.0,
+      "technique_id": "T1598.002"
+    }
+  ],
+  "rule_hint_mappings": []
+}

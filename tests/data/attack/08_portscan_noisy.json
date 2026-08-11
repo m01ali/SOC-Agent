@@ -1,0 +1,119 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "rule_hint",
+        "keyword:port scan",
+        "name",
+        "summary"
+      ],
+      "score": 112.0,
+      "technique_id": "T1046"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 8.5,
+      "technique_id": "T1596.005"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1590.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1590.003"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1590.004"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1590.006"
+    },
+    {
+      "reasons": [
+        "name",
+        "tactic"
+      ],
+      "score": 7.0,
+      "technique_id": "T1590"
+    },
+    {
+      "reasons": [
+        "name",
+        "tactic"
+      ],
+      "score": 7.0,
+      "technique_id": "T1590.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "tactic"
+      ],
+      "score": 7.0,
+      "technique_id": "T1590.005"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1595.001"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1597.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 4.5,
+      "technique_id": "T1571"
+    }
+  ],
+  "rule_hint_mappings": [
+    {
+      "confidence": "low",
+      "evidence": [
+        "matched rule hint for 'Network - Port Scan Detected - Rule'"
+      ],
+      "tactic": "Discovery",
+      "tactic_id": "TA0007",
+      "technique_id": "T1046",
+      "technique_name": "Network Service Discovery"
+    }
+  ]
+}

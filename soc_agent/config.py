@@ -83,8 +83,12 @@ class HistoryConfig(BaseModel):
 
 class AttackConfig(BaseModel):
     catalog: str = "data/attack_catalog.json"
-    candidate_top_k: int = 12
-    max_techniques: int = 5
+    candidate_top_k: int = Field(default=12, gt=0)
+    max_techniques: int = Field(default=5, gt=0)
+    use_llm: bool = True
+    rule_hints: str = "data/rule_hints.yaml"
+    keywords: str = "data/attack_keywords.yaml"
+    max_bundle_chars: int = Field(default=4000, gt=0)
 
 
 class ScoringWeights(BaseModel):

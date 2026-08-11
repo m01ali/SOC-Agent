@@ -1,0 +1,36 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "Host WS-MKT-0077 issued 63 DNS queries for cdn-metrics-sync.example-analytics.net",
+          "title: DNS queries to newly registered domain",
+          "description: Host WS-MKT-0077 issued 63 DNS queries for cdn-metrics-sync.example-analytics.net (registered 4 days ago, no proxy category)"
+        ],
+        "technique_id": "T1071.004"
+      },
+      {
+        "confidence": "medium",
+        "evidence": [
+          "cnd-metrics-sync.example-analytics.net: suspicious (score 60) tags=newly-registered,dga-like"
+        ],
+        "technique_id": "T1568.002"
+      },
+      {
+        "confidence": "low",
+        "evidence": [
+          "cnd-metrics-sync.example-analytics.net: suspicious (score 60) tags=newly-registered,dga-like"
+        ],
+        "technique_id": "T1568"
+      }
+    ]
+  },
+  "key": "f132cda985d51aa9f10de46fc17ac53cca2659f07acf75f4806bd3619a133e2d",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:23.862150+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

@@ -1,0 +1,123 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "rule_hint",
+        "keyword:failed login",
+        "summary",
+        "tactic"
+      ],
+      "score": 113.0,
+      "technique_id": "T1110"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 8.0,
+      "technique_id": "T1110.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1110.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1110.003"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1528"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1555"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1555.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1555.005"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1556.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1556.009"
+    },
+    {
+      "reasons": [
+        "name",
+        "tactic"
+      ],
+      "score": 7.0,
+      "technique_id": "T1212"
+    },
+    {
+      "reasons": [
+        "name",
+        "tactic"
+      ],
+      "score": 7.0,
+      "technique_id": "T1555.001"
+    }
+  ],
+  "rule_hint_mappings": [
+    {
+      "confidence": "low",
+      "evidence": [
+        "matched rule hint for 'Access - Excessive Failed Logins - Rule'"
+      ],
+      "tactic": "Credential Access",
+      "tactic_id": "TA0006",
+      "technique_id": "T1110",
+      "technique_name": "Brute Force"
+    }
+  ]
+}

@@ -25,6 +25,10 @@ attack:
   catalog: data/attack_catalog.json
   candidate_top_k: 12
   max_techniques: 5
+  use_llm: true                        # false = shortlist + rule hints only
+  rule_hints: data/rule_hints.yaml
+  keywords: data/attack_keywords.yaml
+  max_bundle_chars: 4000
 scoring:
   weights: { ti: 0.45, severity: 0.30, history: 0.25 }
   bands:   { escalate: 70, investigate: 40 }

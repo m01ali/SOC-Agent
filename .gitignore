@@ -12,6 +12,9 @@ dist/
 
 # generated / local artifacts
 data/history.db
+# the 51 MB ATT&CK STIX bundle — only its 328 KB derived catalog is committed
+data/enterprise-attack.json
+data/*-stix.json
 results/
 eval_results.json
 

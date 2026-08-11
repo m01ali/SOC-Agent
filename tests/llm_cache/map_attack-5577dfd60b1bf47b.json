@@ -1,0 +1,29 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "initiated 412 HTTPS connections to 203.0.113.66 at fixed 60s intervals over 7h",
+          "threat_intel tags=c2,cobalt-strike"
+        ],
+        "technique_id": "T1071.001"
+      },
+      {
+        "confidence": "high",
+        "evidence": [
+          "initiated 412 HTTPS connections",
+          "JA3 hash matches no sanctioned software"
+        ],
+        "technique_id": "T1573"
+      }
+    ]
+  },
+  "key": "5577dfd60b1bf47b6f2aa95171b4b110113d311cd16453cd2f1a25737996753c",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:00.919489+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

@@ -1,0 +1,115 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "rule_hint",
+        "keyword:sign-in",
+        "keyword:anonymizer",
+        "summary",
+        "tactic"
+      ],
+      "score": 120.5,
+      "technique_id": "T1078"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1133"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1078.004"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1189"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1195"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1195.002"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1566.004"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 4.0,
+      "technique_id": "T1591.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 3.5,
+      "technique_id": "T1033"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 3.5,
+      "technique_id": "T1137.006"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 3.5,
+      "technique_id": "T1204"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 3.5,
+      "technique_id": "T1204.001"
+    }
+  ],
+  "rule_hint_mappings": [
+    {
+      "confidence": "low",
+      "evidence": [
+        "matched rule hint for 'Impossible travel - successful sign-ins from distant locations'"
+      ],
+      "tactic": "Initial Access",
+      "tactic_id": "TA0001",
+      "technique_id": "T1078",
+      "technique_name": "Valid Accounts"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# Vendor rule -> ATT&CK technique. Spec: attack-mapping-06-spec.md §7.
+#
+# How a real SOC encodes what it already knows: detection engineers write rules *from*
+# ATT&CK, so the mapping usually exists in someone's head or spreadsheet already. An
+# exact (case-insensitive) match on NormalizedAlert.vendor_rule scores +100, which is
+# less a weight than a guarantee that an operator's explicit statement survives to the
+# candidate list regardless of how the alert text is worded.
+#
+# Every ID is validated against data/attack_catalog.json at load: a hints file that
+# outlives a catalog rebuild is otherwise a silent source of dropped candidates.
+version: 1
+rules:
+  "Access - Excessive Failed Logins - Rule": [T1110]
+  "Internal SMB lateral movement": [T1021.002]
+  "Impossible travel - successful sign-ins from distant locations": [T1078]
+  "Network - Port Scan Detected - Rule": [T1046]
+  "Unusual outbound data volume": [T1048]
+
+  # Rules seeded in the history store (spec 05 §14) that a real deployment would map too.
+  "EDR - Suspicious Process Network Activity": [T1071]
+  "Email - Reported Phishing": [T1566]
+  "Proxy - Malware Distribution": [T1105]
+  "DNS - Low Reputation Destination": [T1071.004]
+  "Identity - Unfamiliar ASN": [T1078]

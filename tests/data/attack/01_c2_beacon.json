@@ -1,0 +1,103 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "keyword:https connection",
+        "tactic"
+      ],
+      "score": 12.0,
+      "technique_id": "T1071.001"
+    },
+    {
+      "reasons": [
+        "keyword:ja3",
+        "tactic"
+      ],
+      "score": 12.0,
+      "technique_id": "T1573"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 8.0,
+      "technique_id": "T1090.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1219.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 7.0,
+      "technique_id": "T1554"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 7.0,
+      "technique_id": "T1592.002"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.5,
+      "technique_id": "T1205.001"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1090.004"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1102.001"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1102.002"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1102.003"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1090"
+    }
+  ],
+  "rule_hint_mappings": []
+}

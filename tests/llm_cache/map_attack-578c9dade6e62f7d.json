@@ -1,0 +1,12 @@
+{
+  "data": {
+    "techniques": []
+  },
+  "key": "578c9dade6e62f7dd91b593a63c9d22e5a27e4156451744898bc07e63f6279c7",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:11.637400+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

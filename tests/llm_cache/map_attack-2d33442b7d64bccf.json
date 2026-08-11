@@ -1,0 +1,30 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "title: Internal SMB lateral movement",
+          "description: Internal SMB lateral movement",
+          "SMB share enumeration on FS-CORP-03"
+        ],
+        "technique_id": "T1021.002"
+      },
+      {
+        "confidence": "low",
+        "evidence": [
+          "title: Internal SMB lateral movement",
+          "SMB share enumeration on FS-CORP-03"
+        ],
+        "technique_id": "T1570"
+      }
+    ]
+  },
+  "key": "2d33442b7d64bccf0a22f27e08f72686e52d7b37f5c67346151bd22a653e6516",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:15.527057+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

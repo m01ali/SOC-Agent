@@ -1,0 +1,45 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "The email body contains the link hxxps://payroll-update[.]example-billing[.]net/login",
+          "https://payroll-update.example-billing.net/login: malicious (score 90) tags=phishing,credential-harvesting"
+        ],
+        "technique_id": "T1566.002"
+      },
+      {
+        "confidence": "high",
+        "evidence": [
+          "The email...contains...an attachment named invoice_2207.xlsm",
+          "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08: malicious (score 95) tags=maldoc,xlsm-macro"
+        ],
+        "technique_id": "T1566.001"
+      },
+      {
+        "confidence": "high",
+        "evidence": [
+          "user clicked the link on a personal device",
+          "https://payroll-update.example-billing.net/login: malicious (score 90) tags=phishing,credential-harvesting"
+        ],
+        "technique_id": "T1204.001"
+      },
+      {
+        "confidence": "medium",
+        "evidence": [
+          "The email...contains...an attachment named invoice_2207.xlsm",
+          "user reported phishing - malicious attachment [true_positive] (same user j.okafor)"
+        ],
+        "technique_id": "T1204.002"
+      }
+    ]
+  },
+  "key": "e30eadc3cd8fbb3f02a577758eb4e41cac6dbf5fcaa5df8322a4ec42051ac30a",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:07.031814+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

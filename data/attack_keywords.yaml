@@ -1,0 +1,53 @@
+# SOC vocabulary -> ATT&CK technique. Spec: attack-mapping-06-spec.md §8.
+#
+# The bridge between the words a SIEM/EDR/TI feed emits and the words MITRE uses. §9
+# measures this as the single most load-bearing signal in the phase: lexical matching
+# against technique names and summaries alone reaches only 64% shortlist recall, because
+# an alert says "412 HTTPS connections at fixed intervals" and ATT&CK says "Application
+# Layer Protocol: Web Protocols" — the two vocabularies share no words.
+#
+# AUTHORING RULE (a correctness constraint, not style): a phrase must come from the
+# TECHNIQUE's detection surface — terms a SIEM, EDR or TI feed would emit for it — and
+# must NOT be copied from a fixture's title or description. The corpus is ten alerts
+# whose author also writes this table; a table tuned to their exact wording would report
+# a recall number that means nothing. tests/unit/test_attack_shortlist.py enforces this.
+#
+# Phrases are matched as lowercase substrings against title + description + vendor_rule
+# + threat-intel tags. Each hit scores +8.
+version: 1
+keywords:
+  # --- command and control ---
+  T1071.001: ["https connection", "http beacon", "beacon", "user-agent", "web protocol"]
+  T1071.004: ["dns query", "dns queries", "dns request", "dns tunnel", "txt record"]
+  T1573: ["tls", "ssl", "encrypted channel", "ja3", "self-signed certificate"]
+  T1090: ["proxy", "relay node", "tor exit"]
+  T1568: ["domain generation", "dga", "fast flux"]
+  T1105: ["downloaded payload", "dropper", "fake update", "malware distribution"]
+
+  # --- credential access / initial access ---
+  T1110: ["failed login", "failed logon", "authentication failure", "brute force", "password spray"]
+  T1110.003: ["credential stuffing", "spraying"]
+  T1078: ["sign-in", "successful login from", "valid account", "unfamiliar location", "anonymizer"]
+  T1566: ["reported phishing", "suspicious email", "email attachment"]
+  T1566.002: ["phishing", "credential harvesting", "malicious link"]
+  T1204.001: ["clicked the link", "user clicked", "opened the link"]
+  T1204.002: ["macro-enabled", "opened the attachment", "xlsm", "docm"]
+
+  # --- execution ---
+  T1059.001: ["powershell", "encoded command", "-enc ", "invoke-expression"]
+  T1059.003: ["cmd.exe", "batch script"]
+  T1218.011: ["rundll32"]
+
+  # --- discovery / lateral movement ---
+  T1046: ["port scan", "network scan", "distinct ports", "service discovery"]
+  T1018: ["host enumeration", "remote system discovery"]
+  T1021.002: ["smb", "admin$", "c$ share", "psexec", "administrative share"]
+  T1021.001: ["rdp", "remote desktop"]
+  T1021.004: ["ssh session", "ssh login"]
+  T1135: ["share enumeration", "network share discovery"]
+
+  # --- collection / exfiltration ---
+  T1048: ["sftp", "ftp upload", "exfiltrat", "large upload", "alternative protocol"]
+  T1567: ["cloud storage upload", "web service upload", "file-sharing", "file sharing"]
+  T1041: ["exfiltration over c2", "data sent to c2"]
+  T1030: ["chunked transfer", "data volume anomaly"]

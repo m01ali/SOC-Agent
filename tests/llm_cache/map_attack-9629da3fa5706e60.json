@@ -1,0 +1,37 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "user m.silva signed in from two locations 5400 km apart within 41 minutes",
+          "title: Impossible travel - successful sign-ins from distant locations"
+        ],
+        "technique_id": "T1078"
+      },
+      {
+        "confidence": "medium",
+        "evidence": [
+          "description: user m.silva signed in from two locations... second source 198.51.100.77 (anonymizing VPN range)",
+          "host sso-gateway"
+        ],
+        "technique_id": "T1133"
+      },
+      {
+        "confidence": "low",
+        "evidence": [
+          "user m.silva signed in from two locations",
+          "title: Impossible travel - successful sign-ins from distant locations"
+        ],
+        "technique_id": "T1078.004"
+      }
+    ]
+  },
+  "key": "9629da3fa5706e60713caa63508895e9c169446930038685aec81671f2349e1a",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:19.632461+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

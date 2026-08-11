@@ -1,0 +1,27 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "87 failed password attempts for admin from 198.51.100.23 port 52144 ssh2"
+        ],
+        "technique_id": "T1110.001"
+      },
+      {
+        "confidence": "high",
+        "evidence": [
+          "87 failed password attempts for admin from 198.51.100.23 port 52144 ssh2"
+        ],
+        "technique_id": "T1110"
+      }
+    ]
+  },
+  "key": "33f5f1c39c1435e71a7bf1b2d62309694ac954a4721670df37746bc661819ad0",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:10.104211+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}

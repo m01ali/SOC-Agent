@@ -1,0 +1,112 @@
+{
+  "candidates": [
+    {
+      "reasons": [
+        "rule_hint",
+        "keyword:smb",
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 115.5,
+      "technique_id": "T1021.002"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary",
+        "tactic"
+      ],
+      "score": 7.5,
+      "technique_id": "T1534"
+    },
+    {
+      "reasons": [
+        "name",
+        "tactic"
+      ],
+      "score": 7.0,
+      "technique_id": "T1570"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 5.0,
+      "technique_id": "T1550.003"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1080"
+    },
+    {
+      "reasons": [
+        "summary",
+        "tactic"
+      ],
+      "score": 4.5,
+      "technique_id": "T1210"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 3.5,
+      "technique_id": "T1090.001"
+    },
+    {
+      "reasons": [
+        "name",
+        "summary"
+      ],
+      "score": 3.5,
+      "technique_id": "T1491.001"
+    },
+    {
+      "reasons": [
+        "name"
+      ],
+      "score": 3.0,
+      "technique_id": "T1525"
+    },
+    {
+      "reasons": [
+        "name"
+      ],
+      "score": 3.0,
+      "technique_id": "T1557.001"
+    },
+    {
+      "reasons": [
+        "summary"
+      ],
+      "score": 1.0,
+      "technique_id": "T1003"
+    },
+    {
+      "reasons": [
+        "summary"
+      ],
+      "score": 1.0,
+      "technique_id": "T1018"
+    }
+  ],
+  "rule_hint_mappings": [
+    {
+      "confidence": "low",
+      "evidence": [
+        "matched rule hint for 'Internal SMB lateral movement'"
+      ],
+      "tactic": "Lateral Movement",
+      "tactic_id": "TA0008",
+      "technique_id": "T1021.002",
+      "technique_name": "Remote Services: SMB/Windows Admin Shares"
+    }
+  ]
+}

@@ -237,6 +237,67 @@ def context(
 
 
 @app.command()
+def attack(
+    input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to map.")],
+    fmt: Annotated[
+        str | None, typer.Option("--format", help="generic|splunk|elastic|cef|freetext")
+    ] = None,
+    no_llm: Annotated[bool, typer.Option("--no-llm", help="Shortlist + rule hints only.")] = False,
+    show_candidates: Annotated[
+        bool, typer.Option("--candidates", help="Print the full shortlist with scores.")
+    ] = False,
+    pretty: Annotated[bool, typer.Option("--pretty")] = False,
+) -> None:
+    """Normalize, extract, enrich, then print the ATT&CK mapping as JSON (spec 06 surface)."""
+    import json
+
+    from soc_agent.attack import map_attack
+    from soc_agent.extract import extract_entities
+    from soc_agent.ingest import IngestError, load_input
+    from soc_agent.ingest import normalize as normalize_alert
+    from soc_agent.llm.client import MissingAPIKeyError
+    from soc_agent.providers.history import correlate
+    from soc_agent.providers.ti import enrich_ti_sync
+
+    cfg = get_config()
+    try:
+        raw = load_input(input_path)
+        alert = normalize_alert(raw, hint=fmt)  # type: ignore[arg-type]
+        extraction = extract_entities(alert)
+    except MissingAPIKeyError as e:
+        _fail(str(e))
+    except IngestError as e:
+        typer.secho(f"✗ {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(2) from e
+
+    ti = enrich_ti_sync(extraction.entities, config=cfg.threat_intel)
+    correlation = correlate(alert, extraction.entities, config=cfg.history)
+    result = map_attack(
+        alert,
+        extraction.entities,
+        ti.block,
+        correlation.block,
+        use_llm=False if no_llm else None,
+        config=cfg.attack,
+    )
+
+    payload = {
+        "alert_id": alert.alert_id,
+        "mitre_attack": [m.model_dump(mode="json") for m in result.mappings],
+        "errors": [e.model_dump(mode="json") for e in result.errors],
+        "dropped": result.dropped,
+        "llm_used": result.llm_used,
+    }
+    if show_candidates:
+        payload["candidates"] = [
+            {"technique_id": c.technique_id, "score": c.score, "reasons": list(c.reasons)}
+            for c in result.candidates
+        ]
+    indent = 2 if pretty else None
+    typer.echo(json.dumps(payload, indent=indent, sort_keys=pretty))
+
+
+@app.command()
 def enrich(
     input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to enrich.")],
 ) -> None:

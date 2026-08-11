@@ -1,0 +1,38 @@
+{
+  "data": {
+    "techniques": [
+      {
+        "confidence": "high",
+        "evidence": [
+          "url sftp://transfer.example-cloudshare.net/upload [destination]",
+          "user svc_backup [actor]",
+          "threat_intel tags=exfil,file-sharing-abuse for destination IP and domain"
+        ],
+        "technique_id": "T1048"
+      },
+      {
+        "confidence": "medium",
+        "evidence": [
+          "domain transfer.example-cloudshare.net [destination]",
+          "threat_intel tags=file-sharing-abuse for destination domain and URL"
+        ],
+        "technique_id": "T1567"
+      },
+      {
+        "confidence": "low",
+        "evidence": [
+          "user svc_backup [actor]",
+          "related_alerts: Scheduled backup transfer volume spike [benign] (same host SRV-DB-02)"
+        ],
+        "technique_id": "T1029"
+      }
+    ]
+  },
+  "key": "096b774c43b6d674cfaf84394fa6c920c4f2e32ec2fcc542a145234754ceaf27",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "map_attack",
+  "recorded_at": "2026-08-11T13:11:31.707193+00:00",
+  "schema_name": "AttackSelection",
+  "usage_metadata": {}
+}
