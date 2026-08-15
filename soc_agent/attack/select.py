@@ -9,6 +9,10 @@ from pydantic import ValidationError
 
 from soc_agent.attack.catalog import AttackCatalog
 from soc_agent.attack.shortlist import Candidate
+
+# Moved to soc_agent/evidence.py by spec 07 §14.1 (triage and briefing need the same
+# rendering). Re-exported here so this spec's call sites and tests are unchanged.
+from soc_agent.evidence import MAX_RELATED_IN_BUNDLE, build_evidence_bundle
 from soc_agent.llm.client import get_llm
 from soc_agent.llm.prompt import render_messages
 from soc_agent.models import (
@@ -24,66 +28,20 @@ from soc_agent.models.alert import NormalizedAlert
 if TYPE_CHECKING:
     from soc_agent.config import AttackConfig
 
+__all__ = [
+    "EVIDENCE_MAX_CHARS",
+    "MAX_RELATED_IN_BUNDLE",
+    "build_evidence_bundle",
+    "render_candidates",
+    "select_techniques",
+    "validate_selection",
+]
+
 EVIDENCE_MAX_CHARS = 200
-MAX_RELATED_IN_BUNDLE = 3
 
 
 def _bump(dropped: dict[str, int], reason: str) -> None:
     dropped[reason] = dropped.get(reason, 0) + 1
-
-
-def build_evidence_bundle(
-    alert: NormalizedAlert,
-    entities: Sequence[Entity],
-    threat_intel: ThreatIntelBlock | None,
-    related: RelatedAlertsBlock | None,
-    *,
-    max_chars: int = 4000,
-) -> str:
-    """A fixed-order rendering of what specs 03-05 established (§10.3).
-
-    Fixed order matters twice: the cache key hashes the rendered messages, and the
-    briefing (spec 07) cites the same facts. Everything here is already in the output
-    envelope — the bundle introduces nothing the analyst cannot see.
-    """
-    lines: list[str] = [f"title: {alert.title}"]
-    if alert.category:
-        lines.append(f"category: {alert.category}")
-    lines.append(f"severity: {alert.severity}")
-    if alert.vendor_rule:
-        lines.append(f"rule: {alert.vendor_rule}")
-    if alert.description:
-        lines.append(f"description: {alert.description}")
-
-    if entities:
-        lines.append("entities:")
-        for entity in entities:
-            marker = " (internal)" if entity.is_internal else ""
-            lines.append(f"  - {entity.type} {entity.value} [{entity.role}]{marker}")
-
-    if threat_intel and threat_intel.results:
-        lines.append("threat_intel:")
-        for result in threat_intel.results:
-            tags = f" tags={','.join(result.tags)}" if result.tags else ""
-            lines.append(
-                f"  - {result.entity.value}: {result.verdict} (score {result.score}){tags}"
-            )
-
-    if related and related.count:
-        lines.append(
-            f"related_alerts: {related.count} in window, "
-            f"{related.prior_true_positives} prior true positive(s), "
-            f"{related.prior_false_positives} prior false positive(s)"
-        )
-        if related.rule_fp_rate is not None:
-            lines.append(
-                f"  rule false-positive rate: {related.rule_fp_rate:.2f} "
-                f"over {related.rule_fired_count} firings"
-            )
-        for item in related.alerts[:MAX_RELATED_IN_BUNDLE]:
-            lines.append(f"  - {item.title} [{item.disposition}] ({item.relation_reason})")
-
-    return "\n".join(lines)[:max_chars]
 
 
 def render_candidates(candidates: Sequence[Candidate], catalog: AttackCatalog) -> str:

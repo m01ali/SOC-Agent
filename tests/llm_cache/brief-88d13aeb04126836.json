@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Potential DNS-based C2 activity detected on WS-MKT-0077**"
+  },
+  "key": "88d13aeb0412683611d214a3550450aaaa17d6e112b8a8425d33ba8b76f81943",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:07:10.396259+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

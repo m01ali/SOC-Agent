@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Escalate P1: Active Cobalt Strike C2 beaconing confirmed on WS-FIN-0142**Host WS-FIN-0142 (user l.hassan) initiated 412 HTTPS connections at fixed 60-second intervals to 203.0.113.66 over seven hours. The destination IP carries a threat intel score of 95 with Cobalt Strike C2 tags, and the JA3 hash matches no sanctioned software. A prior true positive for suspicious rundll32 activity exists on this host.*   **Threat Intel:** 203.0.113.66 scored 95/100; tagged as malicious C2 and Cobalt Strike.*   **History:** Prior true positive for suspicious rundll32 network activity on WS-FIN-0142; one related benign alert sharing source IP 10.20.14.88.*   **ATT&CK:** T1071.001 (Application Layer Protocol: Web Protocols) and T1573 (Encrypted Channel).**Recommendation:** Escalate immediately as P1 incident. High-confidence indicators of active compromise require urgent isolation of WS-FIN-0142, memory capture, and forensic investigation to determine scope and persistence mechanisms."
+  },
+  "key": "f0aa66fdafcb99ad999f162d107bd0e916f9c8bff0dd6071a06f5b8d6b8f8aeb",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T18:59:26.894516+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

@@ -1,0 +1,30 @@
+{
+  "briefing": {
+    "markdown": "**Network - Port Scan Detected - Rule** \u2014 risk 16/100 (`close`).\n\nDeterministic assessment from threat intel 0, severity 25 and history 35.\n\n- Threat intel: 1 IOC(s) checked, worst verdict **unknown**\n- History: 40 related alert(s), 0 prior true positive(s)\n\n**Recommendation: close (P4).** Generated without the summary model; see `errors` for details."
+  },
+  "recommendation": {
+    "action": "close",
+    "confidence": "low",
+    "override_reason": null,
+    "priority": "P4",
+    "rationale": "Automated recommendation derived from the deterministic risk score of 16/100 (band 'close'), computed from threat intel 0, alert severity 25 and historical correlation 35. The analyst summary model was unavailable, so this rationale is templated rather than reasoned.",
+    "suggested_actions": [
+      "Review the supporting evidence and confirm the disposition",
+      "If closing, record the rationale against the detection rule"
+    ]
+  },
+  "risk": {
+    "band": "close",
+    "components": {
+      "history": 35,
+      "severity": 25,
+      "ti": 0
+    },
+    "score": 16,
+    "weights": {
+      "history": 0.25,
+      "severity": 0.3,
+      "ti": 0.45
+    }
+  }
+}

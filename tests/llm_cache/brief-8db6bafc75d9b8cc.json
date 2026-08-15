@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Investigate potential DNS-based C2 activity on host WS-MKT-0077**Host WS-MKT-0077 (10.20.22.41, user s.novak) issued 63 DNS queries to cdn-metrics-sync.example-analytics.net, a domain registered four days ago with no proxy category. This volume of requests to a newly registered resource warrants immediate investigation to determine if legitimate analytics traffic or malicious communication is occurring.- Threat intel scores the domain as suspicious (60) with tags for newly-registered and DGA-like characteristics, supporting the risk assessment.- Historical data shows one related alert for low-reputation domain queries on this same host, with zero prior true or false positives recorded.- Activity maps to MITRE ATT&CK T1071.004 (Application Layer Protocol: DNS) and T1568.002 (Dynamic Resolution: Domain Generation Algorithms).Recommendation is to investigate at P3 priority due to high confidence in the suspicious indicators and behavioral pattern. Next actions include isolating WS-MKT-0077, analyzing DNS query payloads for encoded data, reviewing s.novak\u2019s recent activity, and validating whether example-analytics.net is an authorized vendor."
+  },
+  "key": "8db6bafc75d9b8cce4fa6947a73129f8655cd88b09f476f78dc73d239d126d4d",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:47.494302+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

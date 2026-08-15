@@ -1,0 +1,23 @@
+{
+  "data": {
+    "action": "escalate",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P1",
+    "rationale": "Threat intelligence confirms both the URL payroll-update.example-billing.net and attachment hash 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08 are malicious with scores of 90 and 95 respectively. User j.okafor has a history of prior true positive phishing incidents and confirmed clicking the credential-harvesting link on a personal device, indicating active compromise risk. The combination of a malicious macro-enabled attachment and confirmed user interaction warrants immediate escalation.",
+    "suggested_actions": [
+      "Immediately reset credentials for user j.okafor and enforce MFA re-enrollment due to confirmed click on credential-harvesting URL.",
+      "Block domain payroll-update.example-billing.net and hash 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08 across email gateway and endpoint protection.",
+      "Search mail logs for other recipients of invoice_2207.xlsm or emails from the same sender to identify potential lateral exposure.",
+      "Interview user j.okafor to determine if corporate laptop was used to open invoice_2207.xlsm or visit the malicious URL.",
+      "Initiate forensic triage on any corporate device associated with j.okafor to check for macro execution artifacts or C2 beaconing."
+    ]
+  },
+  "key": "05cff082343f46821998a3599ade250f55b640eb74bcf04b4da5cc0a70b29008",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T18:59:33.571567+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

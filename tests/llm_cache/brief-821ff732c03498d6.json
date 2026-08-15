@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Investigate potential DNS-based C2 on host WS-MKT-0077**Host WS-MKT-0077 (user s.novak) issued 63 DNS queries to newly registered domain cdn-metrics-sync.example-analytics.net. This activity aligns with MITRE T1071.004 and T1568.002, suggesting possible command and control or dynamic resolution via DGA-like patterns.*   **Threat Intel:** Domain registered 4 days ago, tagged DGA-like/suspicious (score 60), lacks proxy categorization; related alert exists for low-reputation domain queries on same host within current window*   **ATT&CK:** T1071.004 (Application Layer Protocol: DNS), T1568.002 (Domain Generation Algorithms)*   **History:** Zero prior true/false positives recorded for this specific patternInvestigation is recommended due to high-confidence correlation between volume, domain age, and threat intel scoring. Validate if traffic is legitimate analytics synchronization or malicious beaconing by inspecting DNS query payloads and endpoint processes on WS-MKT-0077."
+  },
+  "key": "821ff732c03498d641c14b8ab2099203f8c156181fb430f6c243769011d219d9",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:04:27.732778+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

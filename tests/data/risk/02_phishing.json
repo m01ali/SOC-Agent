@@ -1,0 +1,31 @@
+{
+  "briefing": {
+    "markdown": "**Suspicious Email Reported: Invoice Overdue with Malicious Link and Attachment** \u2014 risk 90/100 (`escalate`).\n\nDeterministic assessment from threat intel 95, severity 85 and history 85.\n\n- Threat intel: 3 IOC(s) checked, worst verdict **malicious**\n- History: 4 related alert(s), 3 prior true positive(s)\n\n**Recommendation: escalate (P1).** Generated without the summary model; see `errors` for details."
+  },
+  "recommendation": {
+    "action": "escalate",
+    "confidence": "low",
+    "override_reason": null,
+    "priority": "P1",
+    "rationale": "Automated recommendation derived from the deterministic risk score of 90/100 (band 'escalate'), computed from threat intel 95, alert severity 85 and historical correlation 85. The analyst summary model was unavailable, so this rationale is templated rather than reasoned.",
+    "suggested_actions": [
+      "Escalate to Tier 2 with the evidence below",
+      "Isolate or restrict the affected host pending review",
+      "Preserve host and network telemetry for the last 7 days"
+    ]
+  },
+  "risk": {
+    "band": "escalate",
+    "components": {
+      "history": 85,
+      "severity": 85,
+      "ti": 95
+    },
+    "score": 90,
+    "weights": {
+      "history": 0.25,
+      "severity": 0.3,
+      "ti": 0.45
+    }
+  }
+}

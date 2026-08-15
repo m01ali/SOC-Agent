@@ -298,6 +298,102 @@ def attack(
 
 
 @app.command()
+def triage(
+    input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to triage.")],
+    fmt: Annotated[
+        str | None, typer.Option("--format", help="generic|splunk|elastic|cef|freetext")
+    ] = None,
+    no_llm: Annotated[
+        bool, typer.Option("--no-llm", help="Deterministic scoring, triage and briefing only.")
+    ] = False,
+    pretty: Annotated[bool, typer.Option("--pretty")] = False,
+) -> None:
+    """Score, recommend and brief a single alert as JSON (spec 07 surface)."""
+    import json
+
+    from soc_agent.attack import map_attack
+    from soc_agent.brief import brief as brief_alert
+    from soc_agent.extract import extract_entities
+    from soc_agent.ingest import IngestError, load_input
+    from soc_agent.ingest import normalize as normalize_alert
+    from soc_agent.llm.client import MissingAPIKeyError
+    from soc_agent.providers.history import correlate
+    from soc_agent.providers.ti import enrich_ti_sync
+    from soc_agent.scoring import score_risk
+    from soc_agent.triage import triage as triage_alert
+
+    cfg = get_config()
+    try:
+        raw = load_input(input_path)
+        alert = normalize_alert(raw, hint=fmt)  # type: ignore[arg-type]
+        extraction = extract_entities(alert)
+    except MissingAPIKeyError as e:
+        _fail(str(e))
+    except IngestError as e:
+        typer.secho(f"✗ {e}", fg=typer.colors.RED, err=True)
+        raise typer.Exit(2) from e
+
+    use_llm = False if no_llm else None
+    ti = enrich_ti_sync(extraction.entities, config=cfg.threat_intel)
+    correlation = correlate(alert, extraction.entities, config=cfg.history)
+    attack = map_attack(
+        alert,
+        extraction.entities,
+        ti.block,
+        correlation.block,
+        use_llm=use_llm,
+        config=cfg.attack,
+    )
+    risk = score_risk(alert, ti.block, correlation.block, config=cfg.scoring)
+    triaged = triage_alert(
+        alert,
+        extraction.entities,
+        ti.block,
+        correlation.block,
+        attack.mappings,
+        risk,
+        use_llm=use_llm,
+        config=cfg,
+    )
+    briefed = brief_alert(
+        alert,
+        extraction.entities,
+        ti.block,
+        correlation.block,
+        attack.mappings,
+        risk,
+        triaged.recommendation,
+        use_llm=use_llm,
+        config=cfg,
+    )
+
+    errors = [
+        e.model_dump(mode="json")
+        for e in (
+            *extraction.errors,
+            *ti.errors,
+            *correlation.errors,
+            *attack.errors,
+            *triaged.errors,
+            *briefed.errors,
+        )
+    ]
+    payload = {
+        "alert_id": alert.alert_id,
+        "risk": risk.model_dump(mode="json"),
+        "recommendation": triaged.recommendation.model_dump(mode="json"),
+        "briefing": briefed.briefing.model_dump(mode="json"),
+        "errors": errors,
+        "dropped": triaged.dropped,
+        "overridden": triaged.overridden,
+        "clamped": triaged.clamped,
+        "llm_used": triaged.llm_used,
+    }
+    indent = 2 if pretty else None
+    typer.echo(json.dumps(payload, indent=indent, sort_keys=pretty))
+
+
+@app.command()
 def enrich(
     input_path: Annotated[Path, typer.Argument(metavar="INPUT", help="Alert file to enrich.")],
 ) -> None:

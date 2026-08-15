@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Recommendation: Close alert as false positive due to high historical FP rate and benign indicators.** Source IP 198.51.100.201 probed 24 TCP ports on internal host 10.20.0.15 within 60 seconds, triggering a reconnaissance detection. Closure is advised because this rule has a 0.95 false-positive rate for this destination with zero prior true positives, and the source IP has a threat intelligence score of 0. The risk model scores this event at 16 (Close band) based heavily on this historical disposition and lack of malicious context.   *   **Threat Intel:** Source IP 198.51.100.201 is unknown with a score of 0. *   **History:** 40 related alerts in window; 5 prior FPs and 0 TPs for this rule/destination pair. *   **ATT&CK:** T1046 (Network Service Discovery), T1595.001 (Active Scanning: Scanning IP Blocks).   **Next Actions:** Verify 10.20.0.15 is an expected scan target or authorized scanner before closing. If confirmed benign, close as P4."
+  },
+  "key": "8c530f156f72286b77403f8b15fcff72c2269ead8452a37252302819c689cf2e",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:00:39.990681+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

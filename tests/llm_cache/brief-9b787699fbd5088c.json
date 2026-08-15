@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Investigate P2: Confirmed malicious host WS-FIN-0142 linked to new SMB lateral movement**User l.hassan initiated SMB traffic from WS-FIN-0142 to FS-CORP-03 (10.20.30.12), correlating with a prior true positive for suspicious rundll32 activity on the source host and related SMB enumeration on the destination. This pattern indicates potential active reconnaissance or staging following confirmed compromise indicators.-   **Threat Intel:** No external indicators; risk driven by internal behavioral correlation and history score (85)  -   **History:** 3 related alerts including 1 prior true positive (rundll32) on WS-FIN-0142 and SMB enumeration on FS-CORP-03  -   **ATT&CK:** T1021.002 (Remote Services: SMB/Windows Admin Shares), T1570 (Lateral Tool Transfer)Validate user l.hassan's legitimacy and inspect WS-FIN-0142 for persistence mechanisms or additional C2 artifacts. Review SMB session logs on FS-CORP-03 to determine if file transfer or execution occurred."
+  },
+  "key": "9b787699fbd5088c628d53673bba4c061f0c5a4360b60673389ea13e001985f2",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:00:07.344078+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

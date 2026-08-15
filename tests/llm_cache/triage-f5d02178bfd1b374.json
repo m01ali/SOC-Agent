@@ -1,0 +1,21 @@
+{
+  "data": {
+    "action": "close",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P4",
+    "rationale": "The hash 4c2fa1e0b93f7d6c815e2a9d03b46c7f5a8e91d2c30b4f6a7d8e9f0a1b2c3d4e is tagged as a clean Sysinternals admin tool in threat intel with a score of 0. The rule 'Hash matched local blocklist' has a 92% false-positive rate over recent firings, including a prior false positive on the same host WS-ENG-0231. These factors strongly indicate the alert is a benign administrative action rather than malware.",
+    "suggested_actions": [
+      "Verify with user d.chen that pskill.exe execution on WS-ENG-0231 was an authorized administrative task.",
+      "Review the local blocklist entry for hash 4c2fa1e0b93f7d6c815e2a9d03b46c7f5a8e91d2c30b4f6a7d8e9f0a1b2c3d4e and consider removing it to prevent future false positives.",
+      "Confirm no other suspicious processes or network connections occurred on WS-ENG-0231 around the time of this alert."
+    ]
+  },
+  "key": "f5d02178bfd1b3748a10fa278862320d245d6b30cd7086622fd5a854833e95a1",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T18:59:52.541432+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

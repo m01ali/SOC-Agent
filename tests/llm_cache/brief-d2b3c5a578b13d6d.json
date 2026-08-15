@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Close alert as false positive due to clean Sysinternals tool and high historical FP rate.** Process pskill.exe executed by user d.chen on host WS-ENG-0231 triggered a local blocklist match, but threat intelligence identifies the SHA256 hash as a legitimate admin utility with a cleanliness score of zero. The detection rule exhibits a 92% false-positive rate across recent firings, including a prior false positive on this specific host, supporting the determination that this is benign administrative activity rather than malware execution.  - Threat intel tags hash 4c2fa1e0b93f7d6c815e2a9d03b46c7f5a8e91d2c30b4f6a7d8e9f0a1b2c3d4e as clean Sysinternals admin-tool with score 0.  - History shows 12 related alerts with 0.92 false-positive rate and one prior false positive on WS-ENG-0231.  - ATT&CK mapping is not provided in the source data.  Recommendation is to close this P4 alert with high confidence because indicators confirm legitimate tool usage and statistical history contradicts malicious intent.  Verify d.chen intended to run pskill.exe, then close the alert and consider tuning the blocklist rule to exclude known-good Sysinternals hashes."
+  },
+  "key": "d2b3c5a578b13d6de1e192b2bd854535ee7786975d129b0467611eab8f1091ba",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:31.292327+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

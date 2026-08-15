@@ -1,0 +1,22 @@
+{
+  "data": {
+    "action": "investigate",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P2",
+    "rationale": "User m.silva completed sign-ins from locations 5400 km apart within 41 minutes, with the second source IP 198.51.100.77 tagged as a suspicious anonymizing VPN in threat intel. This aligns with MITRE T1078 Valid Accounts and is corroborated by related alerts for unfamiliar ASN access and MFA challenges on host sso-gateway. The combination of impossible travel physics and anonymized infrastructure strongly suggests credential compromise rather than legitimate roaming.",
+    "suggested_actions": [
+      "Contact user m.silva out-of-band to verify if they authorized the sign-in from IP 198.51.100.77 or the preceding location.",
+      "Review authentication logs on host sso-gateway for session tokens, device fingerprints, and post-login activity associated with IP 198.51.100.77.",
+      "Check identity provider audit logs for m.silva to identify any configuration changes, mailbox forwarding rules, or new app registrations following the suspicious sign-in.",
+      "Correlate the 'Sign-in from unfamiliar ASN' and 'MFA challenge from new device' alerts to determine if they represent the same attack chain targeting m.silva."
+    ]
+  },
+  "key": "67c64c131c47a86b941951f6832509cc90c0abc6586baa3dd0c5aed03bfe817d",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T19:00:13.341542+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

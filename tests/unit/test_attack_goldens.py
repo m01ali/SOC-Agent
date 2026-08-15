@@ -134,8 +134,13 @@ def test_llm_failure_degrades_to_rule_hints(catalog, cfg, monkeypatch):
 
     alert = load_alert("03_brute_force")
     result = map_attack(
-        alert, load_entities("03_brute_force"), None, None,
-        use_llm=True, catalog=catalog, config=cfg,
+        alert,
+        load_entities("03_brute_force"),
+        None,
+        None,
+        use_llm=True,
+        catalog=catalog,
+        config=cfg,
     )
 
     assert [m.technique_id for m in result.mappings] == ["T1110"]
@@ -192,8 +197,13 @@ def test_empty_shortlist_is_not_an_error(catalog, cfg):
     from tests.unit.test_attack_shortlist import make_alert
 
     result = map_attack(
-        make_alert(title="zzzz qqqq", category=None), [], None, None,
-        use_llm=True, catalog=catalog, config=cfg,
+        make_alert(title="zzzz qqqq", category=None),
+        [],
+        None,
+        None,
+        use_llm=True,
+        catalog=catalog,
+        config=cfg,
     )
     assert result.mappings == []
     assert result.candidates == []

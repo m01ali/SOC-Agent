@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Investigate SSH brute force on BASTION-01 due to prior successful compromise correlation**"
+  },
+  "key": "4c28b28f756bf4989255fc689aeb8cea2f3460aec7b21cd15173c7a4b275a369",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T18:59:47.218587+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

@@ -1,0 +1,31 @@
+{
+  "briefing": {
+    "markdown": "**Unusual outbound data volume** \u2014 risk 77/100 (`escalate`).\n\nDeterministic assessment from threat intel 90, severity 80 and history 50.\n\n- Threat intel: 3 IOC(s) checked, worst verdict **malicious**\n- History: 1 related alert(s), 0 prior true positive(s)\n\n**Recommendation: escalate (P2).** Generated without the summary model; see `errors` for details."
+  },
+  "recommendation": {
+    "action": "escalate",
+    "confidence": "low",
+    "override_reason": null,
+    "priority": "P2",
+    "rationale": "Automated recommendation derived from the deterministic risk score of 77/100 (band 'escalate'), computed from threat intel 90, alert severity 80 and historical correlation 50. The analyst summary model was unavailable, so this rationale is templated rather than reasoned.",
+    "suggested_actions": [
+      "Escalate to Tier 2 with the evidence below",
+      "Isolate or restrict the affected host pending review",
+      "Preserve host and network telemetry for the last 7 days"
+    ]
+  },
+  "risk": {
+    "band": "escalate",
+    "components": {
+      "history": 50,
+      "severity": 80,
+      "ti": 90
+    },
+    "score": 77,
+    "weights": {
+      "history": 0.25,
+      "severity": 0.3,
+      "ti": 0.45
+    }
+  }
+}

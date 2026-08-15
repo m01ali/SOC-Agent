@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Impossible travel indicates likely credential compromise for user m.silva**User m.silva completed sign-ins 5400 km apart within 41 minutes, with the second login originating from a suspicious anonymizing VPN. This physically impossible movement combined with anonymized infrastructure strongly suggests unauthorized access rather than legitimate roaming.- **Threat intel:** Source IP 198.51.100.77 is tagged as a suspicious anonymizing VPN with a score of 60- **History:** Two related alerts on host sso-gateway include sign-in from unfamiliar ASN and MFA challenge from new device; zero prior true or false positives exist- **ATT&CK:** T1078 Valid Accounts, T1133 External Remote Services, and T1078.004 Cloud Accounts mapped to initial access via impossible travel and VPN usage**Recommendation:** Investigate as P2 with high confidence. Validate recent activity with m.silva, review sso-gateway logs for post-authentication actions, and reset credentials if access cannot be verified."
+  },
+  "key": "a9b3ab857ecfc1af365a53470f14ded94bdd51d987064d4fe6b02fd5ac0fef46",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:07:08.501615+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

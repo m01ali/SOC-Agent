@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**High-confidence data exfiltration via malicious SFTP destination requires immediate escalation**"
+  },
+  "key": "c4b19971532e429a1c41b8b403e04c37062c5110c18bcdefb35c67038606d143",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:07:13.979256+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

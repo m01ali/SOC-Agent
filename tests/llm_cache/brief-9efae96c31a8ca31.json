@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Escalate P1: Confirmed credential harvesting and malicious macro execution risk for user j.okafor**Finance user j.okafor reported an \u201cInvoice overdue\u201d email containing a malicious link and XLSM attachment, confirming they clicked the link on a personal device. Threat intelligence scores the URL and attachment hash as malicious (90/95), and the user has three prior true positive phishing incidents, necessitating immediate escalation due to active compromise indicators and repeat targeting.*   **Threat Intel:** `payroll-update.example-billing.net` tagged phishing/credential-harvesting; SHA256 `9f86d...0a08` tagged maldoc/xlsm-macro; both scored >90 maliciousness. User history includes prior credential submission and malicious attachment TPs.*   **ATT&CK:** T1566.001/002 (Spearphishing Attachment/Link), T1204.001/002 (User Execution).*   **Next Actions:** Escalate to Incident Response immediately. Isolate corporate endpoints, reset credentials, investigate personal device impact, and block the domain/hash organization-wide."
+  },
+  "key": "9efae96c31a8ca31bfd0009535bfb520735ba434e5b96706ef55a3e1f8bb4de7",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T18:59:38.493287+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

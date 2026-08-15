@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Investigate SSH brute force on BASTION-01 due to prior successful compromise correlation** Source IP 198.51.100.23 generated 87 failed SSH password attempts for user 'admin' on internal host BASTION-01 (10.20.7.5). Investigation is required because a related alert shows a prior true positive for successful SSH login following a similar failed-login burst on this same host, despite the rule's 50% false-positive rate and unknown threat intel score. - Threat intel for source IP 198.51.100.23 is unknown with a score of 0. - History includes four related alerts in the current window, including one prior true positive for successful SSH login after a failed-login burst on BASTION-01. - MITRE ATT&CK mappings are T1110.001 Brute Force: Password Guessing and T1110 Brute Force under Credential Access. - Recommendation is to investigate as P3 with high confidence because historical evidence of compromise on this specific host outweighs the lack of external threat intelligence. - Verify if any successful authentication occurred from 198.51.100.23 or other sources against 'admin' on BASTION-01 immediately following these failures and review session logs."
+  },
+  "key": "2f106d41c24688a5ddb317775699943b81d97e7a689947d12cbd5aa19df95564",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:25.559797+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

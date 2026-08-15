@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Confirmed phishing with user interaction requires immediate P1 escalation**"
+  },
+  "key": "211739398df4b4471b81acba729de5316274e6d5eec0d7f024adadd15e9f25f3",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:06:58.245598+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

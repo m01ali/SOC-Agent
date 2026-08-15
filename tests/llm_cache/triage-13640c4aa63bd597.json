@@ -1,0 +1,23 @@
+{
+  "data": {
+    "action": "escalate",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P1",
+    "rationale": "Host WS-FIN-0142 established 412 HTTPS connections at fixed 60-second intervals to 203.0.113.66, which is tagged as Cobalt Strike C2 with a threat intel score of 95. This activity aligns with T1071.001 and T1573, and the JA3 hash does not match sanctioned software. A prior true positive for suspicious rundll32 activity on the same host further corroborates active compromise.",
+    "suggested_actions": [
+      "Isolate host WS-FIN-0142 immediately to prevent further C2 communication or lateral movement.",
+      "Capture and analyze memory from WS-FIN-0142 to identify injected processes or Cobalt Strike beacons.",
+      "Review authentication and process creation logs for user l.hassan on WS-FIN-0142 during the 7-hour connection window.",
+      "Block destination IP 203.0.113.66 at the perimeter firewall and proxy if not already blocked.",
+      "Correlate the prior 'EDR: suspicious rundll32 network activity' alert timeline with the current beaconing to establish attack chain continuity."
+    ]
+  },
+  "key": "13640c4aa63bd5975a1f4fde57daea5e163032d4d5baf07d4384c799cdaf8285",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T18:59:21.805143+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Escalate P2: High-volume SFTP exfiltration from SRV-DB-02 to malicious external destination**Internal host SRV-DB-02 initiated unusual outbound data volume via SFTP using the svc_backup account. Although a related benign backup spike exists for this host, the destination's high threat score overrides this context and warrants immediate investigation as potential exfiltration over an alternative protocol (T1048). The activity maps to MITRE T1567 and T1029 based on the web service domain and scheduled transfer characteristics associated with the actor account.  - Threat Intel: Destination IP 203.0.113.199 and domain transfer.example-cloudshare.net are flagged malicious (scores 90/85) with exfil and file-sharing-abuse tags.  - History: One related alert for scheduled backup volume spike on SRV-DB-02 marked benign; zero prior true or false positives recorded.  - ATT&CK: T1048 Exfiltration Over Alternative Protocol (high), T1567 Exfiltration Over Web Service (medium), T1029 Scheduled Transfer (low).  - Recommendation: Escalate as P2 with high confidence because the malicious destination indicators outweigh the benign backup history.  - Next Actions: Validate if svc_backup is authorized to access transfer.example-cloudshare.net, inspect transferred file contents, and block the destination IP/domain pending verification."
+  },
+  "key": "1bf2877251992cf816d7e8506aeb06bc2fa43fe6b558a2bf88aed3549a653776",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:58.842206+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

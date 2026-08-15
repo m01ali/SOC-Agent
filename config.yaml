@@ -31,9 +31,14 @@ attack:
   max_bundle_chars: 4000
 scoring:
   weights: { ti: 0.45, severity: 0.30, history: 0.25 }
-  bands:   { escalate: 70, investigate: 40 }
+  # investigate 40 -> 35 (spec 07 §5): closes spec 05 §16.3's fixture-03 gap.
+  # Band agreement 9/10 -> 10/10; fixture 03 is the only alert in [35, 40).
+  bands:   { escalate: 70, investigate: 35 }
+  allow_downgrade_override: true   # false = the agent may raise a band, never lower it
+  use_llm: true                    # false = deterministic, band-derived triage only
 briefing:
   max_words: 200
+  use_llm: true
 extraction:
   llm_assist: freetext        # freetext | always | never
   max_entities: 200

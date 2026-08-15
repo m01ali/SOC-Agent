@@ -1,0 +1,31 @@
+{
+  "briefing": {
+    "markdown": "**Access - Excessive Failed Logins - Rule** \u2014 risk 36/100 (`investigate`).\n\nDeterministic assessment from threat intel 0, severity 50 and history 85.\n\n- Threat intel: 1 IOC(s) checked, worst verdict **unknown**\n- History: 4 related alert(s), 2 prior true positive(s)\n\n**Recommendation: investigate (P3).** Generated without the summary model; see `errors` for details."
+  },
+  "recommendation": {
+    "action": "investigate",
+    "confidence": "low",
+    "override_reason": null,
+    "priority": "P3",
+    "rationale": "Automated recommendation derived from the deterministic risk score of 36/100 (band 'investigate'), computed from threat intel 0, alert severity 50 and historical correlation 85. The analyst summary model was unavailable, so this rationale is templated rather than reasoned.",
+    "suggested_actions": [
+      "Review the affected host and account activity around the alert time",
+      "Confirm whether the observed activity was expected or authorized",
+      "Pull supporting telemetry before making a disposition"
+    ]
+  },
+  "risk": {
+    "band": "investigate",
+    "components": {
+      "history": 85,
+      "severity": 50,
+      "ti": 0
+    },
+    "score": 36,
+    "weights": {
+      "history": 0.25,
+      "severity": 0.3,
+      "ti": 0.45
+    }
+  }
+}

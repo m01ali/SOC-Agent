@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Close alert as false positive due to high historical FP rate and benign source reputation.** Source IP 198.51.100.201 probed 24 TCP ports on internal host 10.20.0.15 within 60 seconds, triggering a network service discovery rule. Despite the reconnaissance behavior, the deterministic risk score of 16 supports closure because this specific rule-destination pair has a 0.95 false-positive rate with zero prior true positives across 40 related alerts, and threat intelligence assigns the source a neutral score of 0. This pattern indicates expected or benign scanning activity rather than active compromise. The recommendation to close at P4 confidence is based on these statistical indicators outweighing the low-severity event trigger. No further investigation is required unless new context emerges regarding this destination host's exposure profile."
+  },
+  "key": "a5a33f5994629474da66ebd34b5d4a6b02ed0633ee76c67100859de181d60082",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:52.953063+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

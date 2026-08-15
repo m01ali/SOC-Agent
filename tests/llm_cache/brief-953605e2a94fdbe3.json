@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Benign administrative tool execution likely triggering false positive blocklist rule**"
+  },
+  "key": "953605e2a94fdbe3af81a36e5c245ed9780be8c5ff83e40f5ae18c8d4abc5155",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:07:01.994082+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

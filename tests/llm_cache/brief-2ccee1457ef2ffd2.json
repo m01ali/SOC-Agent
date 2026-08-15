@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**High-priority lateral movement from previously compromised host**User l.hassan initiated SMB traffic from WS-FIN-0142 to FS-CORP-03, correlating with a prior true positive for suspicious rundll32 activity on the source host. Related SMB share enumeration on the destination reinforces active reconnaissance or staging behavior requiring immediate validation."
+  },
+  "key": "2ccee1457ef2ffd231dd86689b3a206e0a69b9ad95866b2040db5800074f92ce",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:07:04.401934+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

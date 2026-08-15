@@ -1,0 +1,22 @@
+{
+  "data": {
+    "action": "close",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P4",
+    "rationale": "The deterministic risk assessment places this alert in the 'close' band due to a 0.95 false-positive rate and zero prior true positives for this rule targeting destination 10.20.0.15. Threat intelligence for source IP 198.51.100.201 returns a score of 0, indicating no known malicious association. The high volume of related alerts (40) combined with historical disposition strongly suggests benign or expected scanning activity rather than a genuine threat.",
+    "suggested_actions": [
+      "Verify that 10.20.0.15 is an authorized target for vulnerability scanning or network discovery tools to confirm benign intent.",
+      "Confirm that source IP 198.51.100.201 belongs to an approved internal scanner or trusted third-party vendor.",
+      "Review the specific 24 TCP ports probed on 10.20.0.15 to ensure no sensitive services were unexpectedly exposed during the scan.",
+      "If scanning is unauthorized, add 198.51.100.201 to the network blocklist despite the low risk score."
+    ]
+  },
+  "key": "fe9a9a5475a6d7a466fb1480f69d41e55591c8d8d1dba433ab16a8e574b11cd4",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T19:00:33.909168+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

@@ -1,0 +1,31 @@
+{
+  "briefing": {
+    "markdown": "**Impossible travel - successful sign-ins from distant locations** \u2014 risk 62/100 (`investigate`).\n\nDeterministic assessment from threat intel 60, severity 75 and history 50.\n\n- Threat intel: 1 IOC(s) checked, worst verdict **suspicious**\n- History: 2 related alert(s), 0 prior true positive(s)\n\n**Recommendation: investigate (P2).** Generated without the summary model; see `errors` for details."
+  },
+  "recommendation": {
+    "action": "investigate",
+    "confidence": "low",
+    "override_reason": null,
+    "priority": "P2",
+    "rationale": "Automated recommendation derived from the deterministic risk score of 62/100 (band 'investigate'), computed from threat intel 60, alert severity 75 and historical correlation 50. The analyst summary model was unavailable, so this rationale is templated rather than reasoned.",
+    "suggested_actions": [
+      "Review the affected host and account activity around the alert time",
+      "Confirm whether the observed activity was expected or authorized",
+      "Pull supporting telemetry before making a disposition"
+    ]
+  },
+  "risk": {
+    "band": "investigate",
+    "components": {
+      "history": 50,
+      "severity": 75,
+      "ti": 60
+    },
+    "score": 62,
+    "weights": {
+      "history": 0.25,
+      "severity": 0.3,
+      "ti": 0.45
+    }
+  }
+}

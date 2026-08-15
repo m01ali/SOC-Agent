@@ -1,0 +1,22 @@
+{
+  "data": {
+    "action": "investigate",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P2",
+    "rationale": "Source IP 198.51.100.23 generated 87 failed SSH login attempts against user 'admin' on BASTION-01, matching MITRE T1110.001 brute force behavior. Related alerts include a prior true positive for successful SSH login after a failed-login burst on the same host, indicating this target has been successfully compromised in similar past events. Although threat intel is unknown and the rule has a 50% false-positive rate, the historical correlation to a confirmed compromise warrants investigation over dismissal.",
+    "suggested_actions": [
+      "Verify if any successful SSH authentication occurred for user 'admin' from 198.51.100.23 or other IPs on BASTION-01 immediately following the 87 failed attempts.",
+      "Check current blocklist or firewall rules to confirm whether source IP 198.51.100.23 is already blocked at the perimeter or host level.",
+      "Review SSH logs on BASTION-01 for additional brute force patterns targeting 'admin' or other privileged accounts from 198.51.100.23 in the surrounding time window.",
+      "Validate whether the 'admin' account on BASTION-01 is a valid service account or an unauthorized/default credential that should be disabled."
+    ]
+  },
+  "key": "adaf53103051aa1b3c125ed866b481cc214675bcfad48b3bdac61a1407bbc72d",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T18:59:45.459795+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

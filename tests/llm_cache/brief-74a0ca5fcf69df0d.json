@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Likely false positive due to high historical FP rate and benign source reputation**"
+  },
+  "key": "74a0ca5fcf69df0d98b99e384536cfec9f785d861cd5df4a94351ab786ff6270",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:07:11.856580+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

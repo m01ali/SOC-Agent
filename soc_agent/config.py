@@ -99,12 +99,21 @@ class ScoringWeights(BaseModel):
 
 class ScoringBands(BaseModel):
     escalate: int = 70
-    investigate: int = 40
+    # 40 -> 35 per triage-briefing-07-spec.md §5, closing enrichment-05-spec.md §16.3.
+    # Band agreement across the corpus goes 9/10 -> 10/10; fixture 03 is the only alert
+    # in [35, 40), so nothing else moves.
+    investigate: int = 35
 
 
 class ScoringConfig(BaseModel):
     weights: ScoringWeights = Field(default_factory=ScoringWeights)
     bands: ScoringBands = Field(default_factory=ScoringBands)
+    # triage-briefing-07-spec.md §8.2: an upward override costs an analyst time; a
+    # downward override to `close` is the one output an attacker actively wants.
+    # Default true is faithful to Architecture §5.6; false lets a risk-averse
+    # deployment allow the agent to raise but never lower.
+    allow_downgrade_override: bool = True
+    use_llm: bool = True
 
     @model_validator(mode="after")
     def _validate(self) -> ScoringConfig:
@@ -119,7 +128,8 @@ class ScoringConfig(BaseModel):
 
 
 class BriefingConfig(BaseModel):
-    max_words: int = 200
+    max_words: int = Field(default=200, gt=0)
+    use_llm: bool = True
 
 
 _DEFAULT_INTERNAL_RANGES: list[str] = [

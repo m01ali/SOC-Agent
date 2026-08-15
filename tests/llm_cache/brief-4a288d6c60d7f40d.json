@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Investigate impossible travel for m.silva involving anonymizing VPN**User m.silva completed sign-ins 5400 km apart within 41 minutes, with the second source IP 198.51.100.77 tagged as a suspicious anonymizing VPN. This activity aligns with MITRE T1078 Valid Accounts and correlates with related alerts for unfamiliar ASN access and MFA challenges on host sso-gateway.*   **Threat Intel:** IP 198.51.100.77 scored 60 (suspicious) with tags vpn, anonymizer; maps to T1078, T1133, and T1078.004 Initial Access techniques.*   **History:** Two related alerts exist in the current window; zero prior true or false positives recorded for this user/host combination.*   **Recommendation:** Investigate as P2 with high confidence because impossible travel physics combined with anonymized infrastructure strongly suggests credential compromise rather than legitimate roaming.**Next Actions:** Verify sign-in legitimacy with m.silva, review sso-gateway logs for lateral movement, and reset credentials if access is unconfirmed."
+  },
+  "key": "4a288d6c60d7f40d2ec1673d807cbc4c50be2b8d249d211837ce25cda85d4ddc",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:00:18.400769+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

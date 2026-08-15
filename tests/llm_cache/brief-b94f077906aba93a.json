@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Escalate immediately: High-confidence Cobalt Strike C2 beaconing detected on WS-FIN-0142.**"
+  },
+  "key": "b94f077906aba93a5847add70cf358b27bd2a235cc1dca7977c5d50f8d2f47f5",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:06:57.002669+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

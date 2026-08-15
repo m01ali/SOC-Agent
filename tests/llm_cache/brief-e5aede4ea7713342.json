@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Verdict: Close alert as benign administrative tool execution.** Process `pskill.exe` executed by user `d.chen` on host WS-ENG-0231 triggered a local blocklist match, but threat intelligence identifies the hash as a clean Sysinternals admin tool with a score of 0. The detection rule exhibits a 92% false-positive rate over recent firings, including a prior false positive on this specific host, supporting the high-confidence recommendation to close as P4.  *   **Threat Intel:** Hash tagged as clean Sysinternals/admin-tool (score 0).  *   **History:** 12 related alerts; 1 prior FP on WS-ENG-0231; rule FP rate 0.92.  *   **ATT&CK:** N/A in provided data.  **Next Actions:** Close alert per recommendation. Verify `d.chen` is authorized to use Sysinternals tools on WS-ENG-0231 before final closure."
+  },
+  "key": "e5aede4ea7713342c77a89404e4b7d266cfbe78a8877e506a16c7e698f80bc24",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T18:59:56.810301+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

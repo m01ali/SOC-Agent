@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**High-priority investigation required for obfuscated PowerShell and C2-adjacent traffic on WS-HR-0009**"
+  },
+  "key": "8ab118d39cb8ed69a5dc08f8132a83d02f12e34bdd5b95770c8cc91800c94445",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:00:59.374682+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

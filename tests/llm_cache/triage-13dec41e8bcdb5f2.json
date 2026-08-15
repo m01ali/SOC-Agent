@@ -1,0 +1,22 @@
+{
+  "data": {
+    "action": "escalate",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P1",
+    "rationale": "Internal host SRV-DB-02 initiated a high-volume SFTP transfer to 203.0.113.199 and transfer.example-cloudshare.net, both flagged as malicious with exfiltration tags in threat intelligence. The activity involves the svc_backup account mapping to MITRE T1048, and while a related benign backup spike exists, the destination's threat score of 90 overrides this contextual noise.",
+    "suggested_actions": [
+      "Immediately isolate or block outbound traffic from SRV-DB-02 to 203.0.113.199 and transfer.example-cloudshare.net to stop potential data loss.",
+      "Verify with the backup team if svc_backup is authorized to use sftp://transfer.example-cloudshare.net/upload and confirm if this specific transfer was scheduled.",
+      "Inspect proxy or firewall logs for SRV-DB-02 to determine the exact volume and file names transferred during this session.",
+      "Review authentication logs for svc_backup on SRV-DB-02 to ensure the account has not been compromised or misused outside of normal backup windows."
+    ]
+  },
+  "key": "13dec41e8bcdb5f2ac382aa1ea16389823dad796e2d45314cf67cee3561f8650",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T19:00:45.408940+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

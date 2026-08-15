@@ -1,6 +1,6 @@
 PY := .venv/bin/python
 
-.PHONY: install test test-llm lint format check lock seed eval schema goldens test-llm-refresh f1 context attack attack-recall catalog
+.PHONY: install test test-llm lint format check lock seed eval schema goldens test-llm-refresh f1 context attack attack-recall catalog triage bands
 
 install:            ## editable install + dev tools into existing .venv
 	.venv/bin/pip install -e ".[dev]"
@@ -29,7 +29,8 @@ schema:             ## export schemas/output.schema.json
 goldens:            ## regenerate tests/data/{normalized,entities,context}/*.json
 	SOC_AGENT_LLM_CACHE=replay $(PY) -m pytest \
 	    tests/unit/test_ingest_goldens.py tests/unit/test_extract_goldens.py \
-	    tests/unit/test_context_goldens.py --update-goldens
+	    tests/unit/test_context_goldens.py tests/unit/test_attack_goldens.py \
+	    tests/unit/test_risk_goldens.py --update-goldens
 
 f1:                 ## print the extraction F1 table across all fixtures
 	$(PY) -m pytest tests/unit/test_extract_f1.py -q -s
@@ -45,6 +46,12 @@ context:            ## print the TI + history context for one fixture (ALERT=pat
 
 attack:             ## print the ATT&CK mapping for one fixture (ALERT=path)
 	.venv/bin/soc-agent attack $(or $(ALERT),fixtures/alerts/01_c2_beacon.json) --pretty --candidates
+
+triage:             ## score + recommend + brief one fixture (ALERT=path)
+	.venv/bin/soc-agent triage $(or $(ALERT),fixtures/alerts/01_c2_beacon.json) --pretty
+
+bands:              ## print the risk/band table across the corpus
+	$(PY) -m pytest tests/unit/test_scoring_bands.py -q -s
 
 attack-recall:      ## print the shortlist-recall and top-3 tables
 	$(PY) -m pytest tests/unit/test_attack_shortlist.py tests/unit/test_attack_score.py -q -s

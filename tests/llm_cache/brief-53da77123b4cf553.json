@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Escalate immediately as P1 due to confirmed credential harvesting click and malicious macro attachment.** Finance user j.okafor reported an overdue invoice email containing a malicious link and XLSM attachment, confirming they clicked the credential-harvesting URL on a personal device. Corporate laptop usage remains unverified, creating significant compromise risk given the user's history of prior true positive phishing incidents. Threat intelligence scores the domain payroll-update.example-billing.net at 90 and the attachment hash at 95 for maldoc activity. Related alerts show three prior true positives for this user involving credential submission and malicious attachments. MITRE ATT&CK mappings include Spearphishing Link (T1566.002), Spearphishing Attachment (T1566.001), and User Execution (T1204.001/T1204.002). Escalation is required because high-confidence threat intel confirms active malicious infrastructure combined with verified user interaction and recurring susceptibility. Initiate incident response for potential credential compromise, isolate the corporate endpoint pending forensic review, force password resets for all accessed accounts, and interview the user to determine full scope of personal and corporate device exposure."
+  },
+  "key": "53da77123b4cf5535d8faf573032f261f9ff79fa9cc7b6392526b0d67fb53908",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:20.311486+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

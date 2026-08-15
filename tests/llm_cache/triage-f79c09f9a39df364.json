@@ -1,0 +1,23 @@
+{
+  "data": {
+    "action": "investigate",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P2",
+    "rationale": "Host WS-MKT-0077 generated 63 DNS queries to cdn-metrics-sync.example-analytics.net, a domain registered only 4 days ago and tagged as DGA-like with a suspicious threat intel score of 60. This activity maps to MITRE T1071.004 and T1568.002, indicating potential DNS-based C2 or dynamic resolution. A related alert for low-reputation domain queries on the same host reinforces the pattern of suspicious network behavior.",
+    "suggested_actions": [
+      "Isolate host WS-MKT-0077 (10.20.22.41) pending investigation to prevent potential C2 communication.",
+      "Query DNS and proxy logs for WS-MKT-0077 to determine if cdn-metrics-sync.example-analytics.net resolved to an external IP and if any subsequent HTTP/S connections occurred.",
+      "Interview user s.novak to verify if the DNS activity corresponds to authorized marketing analytics software or testing.",
+      "Run endpoint detection scans on WS-MKT-0077 to identify malware or unauthorized processes associated with the DNS queries.",
+      "Block domain cdn-metrics-sync.example-analytics.net at the DNS resolver or firewall level while triage is ongoing."
+    ]
+  },
+  "key": "f79c09f9a39df3643e954fccc3ae8d58dc9fc1adaae8ddc11f210e00530b1104",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T19:00:23.954598+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}

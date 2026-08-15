@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Investigate confirmed lateral movement from previously compromised host WS-FIN-0142 to file server FS-CORP-03.** User l.hassan initiated SMB traffic from 10.20.14.88 to 10.20.30.12, correlating with a prior true positive for suspicious rundll32 activity on the source host and recent SMB share enumeration on the destination. This sequence indicates active reconnaissance or staging following initial compromise rather than benign administrative behavior. No threat intelligence indicators are present in this alert data. Historical context includes three related alerts and one prior true positive involving the same source host and user. MITRE ATT&CK mappings include T1021.002 (Remote Services: SMB/Windows Admin Shares) and T1570 (Lateral Tool Transfer). The recommended action is to investigate at P3 priority with high confidence due to the correlation between confirmed malicious host activity and new lateral movement. Next actions include isolating WS-FIN-0142, reviewing l.hassan\u2019s authentication logs, inspecting FS-CORP-03 for unauthorized file access or tool transfer, and validating whether the SMB session was legitimate."
+  },
+  "key": "c3a61608bdd02c4dfdc8a7dddf536b92535b3c0717287f1703920bd729b4c4c3",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:36.518551+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

@@ -1,0 +1,12 @@
+{
+  "data": {
+    "markdown": "**Escalate immediately: Active Cobalt Strike C2 beaconing confirmed on WS-FIN-0142.** Host WS-FIN-0142 initiated 412 HTTPS connections at fixed 60-second intervals over seven hours to external IP 203.0.113.66 using an unsanctioned JA3 hash. This periodic behavior combined with high-confidence threat intelligence indicates established command and control requiring urgent containment and investigation under user l.hassan's context.  - Threat intel scores destination 203.0.113.66 as malicious (95) with tags c2 and cobalt-strike.  - History includes one prior true positive for suspicious rundll32 network activity on this same host.  - ATT&CK mappings include T1071.001 Application Layer Protocol: Web Protocols and T1573 Encrypted Channel based on beacon timing and encryption.  Escalation to P2 is required because the fixed-interval HTTPS traffic, unsanctioned JA3 fingerprint, and corroborating historical alert confirm active compromise rather than benign automation.  Isolate WS-FIN-0142 from the network, preserve volatile memory and disk artifacts, and initiate incident response procedures to determine initial access vector and lateral movement scope."
+  },
+  "key": "b9e435625f3cad18ad175319961098e336a84daf07a2e4daee58caa4f7615a0d",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "brief",
+  "recorded_at": "2026-08-15T19:09:15.512590+00:00",
+  "schema_name": "Briefing",
+  "usage_metadata": {}
+}

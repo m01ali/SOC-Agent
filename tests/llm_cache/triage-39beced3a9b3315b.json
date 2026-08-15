@@ -1,0 +1,22 @@
+{
+  "data": {
+    "action": "investigate",
+    "confidence": "high",
+    "override_reason": null,
+    "priority": "P2",
+    "rationale": "Host WS-FIN-0142 has a prior true positive for suspicious rundll32 network activity, and user l.hassan is now associated with SMB lateral movement (T1021.002) targeting FS-CORP-03. The presence of related SMB share enumeration on the same destination IP 10.20.30.12 reinforces active reconnaissance or staging behavior. This correlation between a confirmed malicious host and new lateral movement warrants immediate investigation.",
+    "suggested_actions": [
+      "Review EDR telemetry on WS-FIN-0142 for process trees and command lines associated with the prior rundll32 true positive and current SMB activity.",
+      "Inspect SMB session logs on FS-CORP-03 (10.20.30.12) to determine if user l.hassan accessed or modified sensitive files during the connection from 10.20.14.88.",
+      "Correlate authentication logs for l.hassan across both hosts to identify anomalous login times or credential usage patterns.",
+      "Check network flow data between 10.20.14.88 and 10.20.30.12 for unusual volume or file transfer indicators consistent with T1570 Lateral Tool Transfer."
+    ]
+  },
+  "key": "39beced3a9b3315b2a091f407581664ffb0e033cc6ddfd42fa9fb6bb6fe7c9c3",
+  "kind": "pydantic",
+  "model": "qwen3.7-max",
+  "node": "triage",
+  "recorded_at": "2026-08-15T19:00:02.381786+00:00",
+  "schema_name": "TriageRecommendation",
+  "usage_metadata": {}
+}
